@@ -17,10 +17,8 @@ div#header {
     font-weight: bold;
     height: 40px;
     line-height: 32px;
-    /* margin: 24px 0px 12px 128px;*/
-    margin: 0 auto; /* Full Width Header*/
-    /* text-transform: uppercase; */
-    background:lightgreen;
+    margin: 0px auto; /* Full Width Header*/
+    background:lightblue;
     padding-bottom: 10px;
 }
 
@@ -32,6 +30,7 @@ div#header img {
 
 div#header a {
     text-decoration: none;
+    margin: 0px auto;
 }
 
 div#main {
@@ -44,18 +43,21 @@ div#sidebar {
     width: 160px;
     float: left;
     clear: left;
+    background-color: lightblue;
+    padding-bottom: 100%;
 }
 
 div#sidebar h1 {
-    clear: both;
-    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
 }
 
 div#sidebar a {
-    clear: both;
-    display: block;
-    float: right;
-    margin-bottom: 10px;
+    display: block; 
+    width: 50%;
+    margin: 0px auto;
+    margin-bottom: 5px;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -74,7 +76,7 @@ div#footer {
     clear: both;
     font-size: 90%;
     text-align: center;
-    background-color: lightgreen;
+    background-color: lightblue;
 }
 
 p {
@@ -141,7 +143,6 @@ p.caption {
 /* http://www.cssportal.com/css3-button-generator/ */
 
 .button { 
-  font-family: arial;
   color: #14396A !important;
   font-size: 14px;
   text-shadow: 1px 1px 0px #7CACDE;
