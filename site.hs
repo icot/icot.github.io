@@ -41,8 +41,8 @@ main = hakyllWith config $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    -- Tutorials
-    match "tutorials/*" $ do
+    -- Posts
+    match "posts/*" $ do
         route   $ setExtension "html"
         compile $ pandocCompilerWith defaultHakyllReaderOptions withToc
             >>= loadAndApplyTemplate "templates/tutorial.html" defaultContext
@@ -50,11 +50,11 @@ main = hakyllWith config $ do
             >>= relativizeUrls
 
     -- Tutorial list
-    create ["tutorials.html"] $ do
+    create ["blog.html"] $ do
         route idRoute
         compile $ do
-            tutorials <- loadAll "tutorials/*"
-            itemTpl   <- loadBody "templates/tutorial-item.html"
+            tutorials <- loadAll "posts/*"
+            itemTpl   <- loadBody "templates/blog-item.html"
             let (series, articles) = partitionTutorials $
                     sortBy (comparing itemIdentifier) tutorials
 
