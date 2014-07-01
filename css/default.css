@@ -20,13 +20,25 @@ div#header {
     line-height: 32px;
     margin: 0px auto; /* Full Width Header*/
     background:#172B38;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+    padding-top: 12px;
     color: white; 
+}
+
+div#header h1 {
+    text-transform: lowercase !important;
+    font-size: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 128px;
+    color:white;
 }
 
 div#header img {
     float: left;
     margin: 0px 30px 0px 0px;
+    padding-top: 5px;
+    padding-left: 10px;
     width: 50px;
 }
 
@@ -84,6 +96,11 @@ div#footer {
     color:white;
 }
 
+div#footer a {
+    text-decoration: none;
+    margin: 0px auto;
+    color: white; 
+}
 p {
     padding: 0px;
     margin: 10px 0px 10px 0px;
