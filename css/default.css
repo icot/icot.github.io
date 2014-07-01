@@ -8,6 +8,7 @@ html {
 }
 
 body {
+    color: black;
     padding: 0px 0px 60px 0px;
     margin: 0px;
 }
@@ -18,8 +19,9 @@ div#header {
     height: 40px;
     line-height: 32px;
     margin: 0px auto; /* Full Width Header*/
-    background:lightblue;
+    background:#172B38;
     padding-bottom: 10px;
+    color: white; 
 }
 
 div#header img {
@@ -31,6 +33,7 @@ div#header img {
 div#header a {
     text-decoration: none;
     margin: 0px auto;
+    color: white; 
 }
 
 div#main {
@@ -43,7 +46,7 @@ div#sidebar {
     width: 160px;
     float: left;
     clear: left;
-    background-color: lightblue;
+    background-color: #172B38;
     padding-bottom: 100%;
 }
 
@@ -51,6 +54,7 @@ div#sidebar h1 {
     margin-left: auto;
     margin-right: auto;
     width: 75%;
+    color:white;
 }
 
 div#sidebar a {
@@ -76,7 +80,8 @@ div#footer {
     clear: both;
     font-size: 90%;
     text-align: center;
-    background-color: lightblue;
+    background-color: #172B38;
+    color:white;
 }
 
 p {
@@ -141,19 +146,19 @@ p.caption {
 }
 
 /* http://www.cssportal.com/css3-button-generator/ */
-
-.button { 
-  color: #14396A !important;
+.button {
+  font-family: arial;
+  font-weight: bold;
+  color: #FFFFFF !important;
   font-size: 14px;
-  text-shadow: 1px 1px 0px #7CACDE;
-  box-shadow: 1px 1px 1px #BEE2F9;
-  padding: 10px 25px;
-  -moz-border-radius: 1px;
-  -webkit-border-radius: 1px;
-  border-radius: 1px;
-  background: #63B8EE;
+  padding: 5px 25px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 5px;
+  border: 2px solid #3866A3;
+  background: #172B38;
 }
 .button:hover {
-  color: #14396A !important;
+  color: #FFFFFF !important;
   background: #468CCF;
 }
