@@ -45,7 +45,7 @@ main = hakyllWith config $ do
     match "posts/*" $ do
         route   $ setExtension "html"
         compile $ pandocCompilerWith defaultHakyllReaderOptions withToc
-            >>= loadAndApplyTemplate "templates/tutorial.html" defaultContext
+            >>= loadAndApplyTemplate "templates/blog.html" defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
@@ -68,7 +68,7 @@ main = hakyllWith config $ do
                     defaultContext
 
             makeItem ""
-                >>= loadAndApplyTemplate "templates/tutorials.html" tutorialsCtx
+                >>= loadAndApplyTemplate "templates/blog.html" tutorialsCtx
                 >>= loadAndApplyTemplate "templates/default.html" tutorialsCtx
                 >>= relativizeUrls
 
