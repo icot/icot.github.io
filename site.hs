@@ -49,27 +49,27 @@ main = hakyllWith config $ do
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    -- Tutorial list
+    -- Blog posts
     create ["blog.html"] $ do
         route idRoute
         compile $ do
-            tutorials <- loadAll "posts/*"
+            blogposts <- loadAll "posts/*"
             itemTpl   <- loadBody "templates/blog-item.html"
-            let (series, articles) = partitionTutorials $
-                    sortBy (comparing itemIdentifier) tutorials
+        --   let (series, articles) = partitionTutorials $
+        --            sortBy (comparing itemIdentifier) tutorials
 
-            series'   <- applyTemplateList itemTpl defaultContext series
-            articles' <- applyTemplateList itemTpl defaultContext articles
+        --    series'   <- applyTemplateList itemTpl defaultContext series
+            blogposts' <- applyTemplateList itemTpl defaultContext blogposts
 
-            let tutorialsCtx =
-                    constField "title" "Tutorials"  `mappend`
-                    constField "series" series'     `mappend`
-                    constField "articles" articles' `mappend`
+            let blogpostsCtx =
+                    constField "title" "Posts"  `mappend`
+        --            constField "series" series'     `mappend`
+        --            constField "articles" articles' `mappend`
                     defaultContext
 
             makeItem ""
-                >>= loadAndApplyTemplate "templates/blog.html" tutorialsCtx
-                >>= loadAndApplyTemplate "templates/default.html" tutorialsCtx
+--                >>= loadAndApplyTemplate "templates/blog.html" blogpostsCtx
+                >>= loadAndApplyTemplate "templates/default.html" blogpostsCtx
                 >>= relativizeUrls
 
     -- Templates
