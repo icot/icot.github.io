@@ -45,7 +45,7 @@ main = hakyllWith config $ do
     match "posts/*" $ do
         route   $ setExtension "html"
         compile $ pandocCompilerWith defaultHakyllReaderOptions withToc
-            >>= loadAndApplyTemplate "templates/blog.html" defaultContext
+            >>= loadAndApplyTemplate "templates/blog-post.html" defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
@@ -53,28 +53,23 @@ main = hakyllWith config $ do
     create ["blog.html"] $ do
         route idRoute
         compile $ do
-            blogposts <- loadAll "posts/*"
+            posts <- loadAll "posts/*"
             itemTpl   <- loadBody "templates/blog-item.html"
-        --   let (series, articles) = partitionTutorials $
-        --            sortBy (comparing itemIdentifier) tutorials
-
-        --    series'   <- applyTemplateList itemTpl defaultContext series
-            blogposts' <- applyTemplateList itemTpl defaultContext blogposts
+            posts' <- applyTemplateList itemTpl defaultContext posts
 
             let blogpostsCtx =
-                    constField "title" "Posts"  `mappend`
-        --            constField "series" series'     `mappend`
-        --            constField "articles" articles' `mappend`
+                    constField "title" "Personal blog"  `mappend`
+                    constField "posts" posts'  `mappend`
                     defaultContext
 
             makeItem ""
---                >>= loadAndApplyTemplate "templates/blog.html" blogpostsCtx
+                >>= loadAndApplyTemplate "templates/blog.html" blogpostsCtx
                 >>= loadAndApplyTemplate "templates/default.html" blogpostsCtx
                 >>= relativizeUrls
 
     -- Templates
     match "templates/*" $ compile templateCompiler
-  where
+    where
     withToc = defaultHakyllWriterOptions
         { writerTableOfContents = True
         , writerTemplate = "$toc$\n$body$"
