@@ -80,7 +80,7 @@ main = hakyllWith config $ do
 --------------------------------------------------------------------------------
 config :: Configuration
 config = defaultConfiguration
-    { deployCommand = "cp -r _site/* ../icot.github.io/"
+    { deployCommand = "cp -r _site/* .."
     }
 
 
