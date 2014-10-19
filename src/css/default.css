@@ -1,0 +1,181 @@
+html {
+    background-color: white;
+    color: black;
+    font-family: sans-serif;
+    line-height: 140%;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    color: black;
+    padding: 0px 0px 60px 0px;
+    margin: 0px;
+}
+
+div#header {
+    font-size: 28px;
+    font-weight: bold;
+    height: 40px;
+    line-height: 32px;
+    margin: 0px auto; /* Full Width Header*/
+    background:#172B38;
+    padding-bottom: 20px;
+    padding-top: 12px;
+    color: white; 
+}
+
+div#header h1 {
+    text-transform: lowercase !important;
+    font-size: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 128px;
+    color:white;
+}
+
+div#header img {
+    float: left;
+    margin: 0px 30px 0px 0px;
+    padding-top: 5px;
+    padding-left: 10px;
+    width: 50px;
+}
+
+div#header a {
+    text-decoration: none;
+    margin: 0px auto;
+    color: white; 
+}
+
+div#main {
+    margin: 0px auto 0px auto;
+    width: 860px;
+}
+
+div#sidebar {
+    margin-right: 30px;
+    width: 160px;
+    float: left;
+    clear: left;
+    background-color: #172B38;
+    padding-bottom: 100%;
+}
+
+div#sidebar h1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    color:white;
+}
+
+div#sidebar a {
+    display: block; 
+    width: 50%;
+    margin: 0px auto;
+    margin-bottom: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+div#sidebar img {
+    margin: 0px;
+}
+
+div#content {
+    width: 670px;
+    float: right;
+}
+
+div#footer {
+    padding-top: 30px;
+    clear: both;
+    font-size: 90%;
+    text-align: center;
+    background-color: #172B38;
+    color:white;
+}
+
+div#footer a {
+    text-decoration: none;
+    margin: 0px auto;
+    color: white; 
+}
+p {
+    padding: 0px;
+    margin: 10px 0px 10px 0px;
+}
+
+a {
+    color: black;
+}
+
+h1 {
+    font-size: 20px;
+    margin: 12px 0px 12px 0px;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 12px 0px 12px 0px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+h1 a, h2 a, h3 a {
+    text-decoration: none;
+}
+
+img {
+    border: none;
+    display: block;
+    margin: 6px auto 30px auto;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 1em;
+    margin-left: 1em;
+}
+
+code {
+    background-color: rgb(250, 250, 250);
+    border: 1px solid rgb(200, 200, 200);
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+pre code {
+    display: block;
+    padding: 8px;
+    margin-bottom: 2em;
+}
+
+p.caption {
+    display: none;
+}
+
+/* http://www.cssportal.com/css3-button-generator/ */
+.button {
+  font-family: arial;
+  font-weight: bold;
+  color: #FFFFFF !important;
+  font-size: 14px;
+  padding: 5px 25px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 5px;
+  border: 2px solid #3866A3;
+  background: #172B38;
+}
+.button:hover {
+  color: #FFFFFF !important;
+  background: #468CCF;
+}
