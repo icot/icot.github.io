@@ -1,6 +1,6 @@
 html, body {
-	background-color: #002a35;
-	color: #839496;
+	background-color: #f0f0f0;
+	color: #010101;
 }
 
 div#header img {
@@ -25,13 +25,13 @@ div#top a {
 }
 
 div#footer {
-    padding-top: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     clear: both;
     font-size: 90%;
     text-align: center;
-    background-color: #172B38;
-    color:white;
-	border-color: #073642;
+    background-color: #010101;
+    color: #f0f0f0;
 }
 
 a, a:visited, a:active {
@@ -40,9 +40,8 @@ a, a:visited, a:active {
 }
 
 a:hover {
-	background-color: #073642;
-	border-color: #073642;
-	color: #2aa198;
+	background-color: #010101;
+	color: #f0f0f0;
 }
 
 h1, h2, h3 {
@@ -71,11 +70,6 @@ blockquote {
 	color: #2aa198;
 	background-color: #073642;
 }
-
-#footer {
-	border-color: #073642;
-}
-
 /*** Pygments ***/
 .highlight{
 	background-color: #073642;
@@ -90,14 +84,12 @@ blockquote {
 .button {
   font-family: arial;
   font-weight: bold;
-  color: #FFFFFF !important;
+  color: #f0f0f0 !important;
   font-size: 14px;
-  padding: 5px 25px;
+  padding: 10px 10%;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
-  border-radius: 5px;
-  border: 2px solid #3866A3;
-  background: #172B38;
+  background: #010101;
 }
 .button:hover {
   color: #FFFFFF !important;
