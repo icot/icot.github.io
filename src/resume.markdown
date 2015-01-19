@@ -2,6 +2,10 @@
 title: Resume
 ---
 
-## Experience
+# Bio
 
-- Fix issue when using `metadataRoute` after other custom routes
+## 2000-2006
+
+## 2006-2011
+
+## 2011-20XX
