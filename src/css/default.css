@@ -84,13 +84,11 @@ blockquote {
 
 /* http://www.cssportal.com/css3-button-generator/ */
 .button {
-  font-family: arial;
   font-weight: bold;
   color: #f0f0f0 !important;
-  font-size: 14px;
   padding: 10px 10%;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
+  moz-border-radius: 10px;
+  webkit-border-radius: 10px;
   background: #010101;
 }
 .button:hover {
