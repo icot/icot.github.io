@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Hakyll - resume</title>
+        <title>Hakyll - Resume</title>
 
         <!-- Stylesheets. -->
         <link rel="stylesheet" type="text/css" href="./css/default.css" />
         <link rel="stylesheet" type="text/css" href="./css/syntax.css" />
-
+        <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata:b,i,bi">
         <!-- Metadata. -->
         <meta name="keywords" content="blog, resume" />
         <meta name="description" content="Personal Blog" />
@@ -20,8 +20,7 @@
                 <h1>icot.github.io</h1>
             </div>
             <!-- Sidebar. -->
-            <div id="sidebar">
-                <h1>Navigation</h1>
+            <div id="header">
                 <a href="./index.html" class="button">home</a>
                 <a href="./resume.html" class="button">resume</a>
                 <a href="./blog.html" class="button">blog</a>
@@ -29,57 +28,10 @@
             </div>
 
             <div id="content">
-                <h1 id="working-experience">Working Experience</h1>
-<p>Since Juno 2011 I have been part of the Databases Group at CERN, where I have been working mainly in two areas:</p>
+                <h2 id="experience">Experience</h2>
 <ul>
-<li><p>Developing and managing the CERN Database on Demand service. A service offering on demand database instances from different database vendors (MySQL, Oracle, PostgreSQL) which currently hosts over 150 databases including several critical ones for the CERN central IT services. Within this project I am in charge of:</p>
-<ul>
-<li><p>Developing and maintaining the instance management system backend.</p></li>
-<li><p>Administering the service infrastructure and its hosted databases.</p></li>
-<li><p>Automatizing and testing database upgrade procedures.</p></li>
-<li><p>System benchmarking and evaluation.</p></li>
-</ul></li>
-<li><p>As part of the <a href="http://openlab.web.cern.ch/"><strong>CERN openlab</strong></a> I research virtualization technologies for their application on the Databases group activities. I test, study and evaluate OracleVM and OpenStack and their integration as a solution for the virtual infrastructure needs of the CERN Databases group. Some of the activities I have performed are:</p>
-<ul>
-<li><p>Executing a set of performance measurements for comparing database responses running MySQL Server on virtualized environments (Hyper-V and OracleVM).</p></li>
-<li><p>Network throughput measurements using INTEL SR-IOV cards on OracleVM hypervisors.</p></li>
-<li><p>Integration of the OracleVM Hypervisor with OpenStack for its use as a Nova computing resource.</p></li>
-</ul></li>
+<li>Fix issue when using <code>metadataRoute</code> after other custom routes</li>
 </ul>
-<p>During my years at CSIC as a member of the Advanced Computing and e-Science research team, I worked in several projects on different roles, achieving afairly heterogenous background, as I was involved in different aspects of the projects such as development, system design, administration or management. What follows is a list of the projects I was involved with during this time and the role I took part on them:</p>
-<ul>
-<li><p>Co-designed and implemented a system for tracking, monitoring and analyzing geographical movements of sensor fleets composed by millions of members. The system was based on PostgreSQL and MongoDB, with a custom sharding system implemented in Python.</p></li>
-<li><p>In charge of the CSIC tasks in the <a href="http://www.dorii.eu"><strong>DORII (FP7 RI-211693)</strong></a> project. Designed the architecture and was the leader of the implementation team for the water reservoir monitoring application. I was also a member of the DORII Integration Team, which carried out integration tests for the different project middleware components.</p></li>
-<li><p>Collaborated on the administration of the CSIC-IFCA datacenter as part of the contribution to the Spain <strong>CMS TIER-2</strong> Centre.</p></li>
-<li><p>Extension of a distributed hydrological model (SMDR) running on top of an open source geographic information system (GRASS) for execution on the Grid. This involved porting the model code and packaging the GIS software so it could be executed on the non-interactive grid environment; and developing an extension to the model for studying the dispersion of livestock generated nutrients. This work was carried as part of the <strong>Int.eu.grid (Interactive European Grid Project) (FP6 C-031857)</strong>.</p></li>
-<li><p>Co-designed and implemented a multi-parametric probe for measuring water quality parameters.</p></li>
-</ul>
-<h1 id="education">Education</h1>
-<ul>
-<li><p><span><strong>Specialisation in Radio communication</strong>. Specialisation courses: Digital Voice Processing, Microwave Monolithic Integrated Circuit (MMIC) Design, Artificial Intelligence and Expert Systems, Radio frequency circuits, High frequency circuits, Radio communication Technologies, Radio Communication Links, TV</span></p></li>
-<li><p><span><strong>Master’s Thesis: Multi-resolution classification of ECG signals</strong>. Development of a novel classification method for ECG (Electrocardiogram) signals based on features extracted applying dual Time Domain - Wavelet Domain analysis and clustering methods for its application in intelligent medical devices such as pace-makers and defibrillators. Developed in the <strong>University of Gent</strong>, (Gent, Belgium) during the 2005-06 academic course in collaboration with <em><a href="http://www.medtronic.com">Medtronic, Inc</a>. </em></span></p></li>
-<li><p>Specialisation in Diagnosis, Planning and Intelligent Control Systems, with the following specialisation courses: Data Mining, Bioinspired Neural Methods, Information Recovery, Applied Robotics and Bayesian Networks.</p></li>
-<li><p>Master’s Thesis: in progress.</p></li>
-</ul>
-<h1 id="relevant-skills">Relevant skills</h1>
-<p>[ y unit title=0.4cm, y unit chart=0.5cm, x unit = 0.14cm, time slot format=isodate-yearmonth, compress calendar, title/.append style=<span>draw=none, fill=DarkSeaGreen</span>, title label font=**, title label node/.append style=<span>below=-1.6ex</span>, title left shift=.05, title right shift=-.05, title height=1, bar/.append style=<span>draw=none, fill=DarkSeaGreen</span>, bar height=.6, bar label font=, group right shift=0, group top shift=.6, group height=.3, group peaks height=.2, bar incomplete/.append style=<span>fill=purple</span> ]<span>2006-7</span><span>2014-08</span><br /><br /><br /><span> </span><br /><span> </span><br /> <span> </span><br /><span> </span><br /><span> </span><br /><span> </span><br /> <span> </span><br /><span> </span><br /> <span> </span> **</p>
-<h1 id="training">Training</h1>
-<p><span>CERN</span><span>Geneva</span><span>Percona Training</span></p>
-<p><span>CERN</span><span>Geneva</span><span>CERN openlab workshop</span></p>
-<p><span>CERN</span><span>Geneva</span><span>Hortonworks training</span></p>
-<p><span>CERN</span><span>Geneva</span><span>Oracle Training</span></p>
-<p><span>CERN</span><span>Geneva</span><span>Oracle Training</span></p>
-<p><span>CERN</span><span>Geneva</span><span>CERN openlab workshop</span></p>
-<p><span>CERN</span><span>Geneva</span><span>CERN openlab workshop</span></p>
-<h1 id="talks">Talks</h1>
-<p><span>CERN DB as A Service, a DBA’s Story</span> <span>Integrating a multisensor mobile system in the grid infrastructure</span></p>
-<h1 id="teaching-activities">Teaching Activities</h1>
-<p><span> Outreach activity and booth in the <strong>European Science Open Forum (ESOF) 2008 </strong> </span></p>
-<p><span> Seminar imparted as part of the <strong><em>Grids and e-Science</em></strong> course of the <strong>Master in Computation</strong> program of the University of Cantabria </span></p>
-<h1 id="grants">Grants</h1>
-<p><span>Spanish Ministry of Research and Innovation (MICINN)</span></p>
-<h1 id="awards">Awards</h1>
-<h1 id="languages">Languages</h1>
             </div>
 
             <div id="footer">
