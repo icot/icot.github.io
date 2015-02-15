@@ -3,8 +3,6 @@
 import           Data.Monoid         (mappend)
 import           Hakyll
 import           Text.Pandoc
-
-
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyllWith config $ do
@@ -42,18 +40,18 @@ main = hakyllWith config $ do
             posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
             itemTpl <- loadBody "templates/blog-item.html"
             posts' <- applyTemplateList itemTpl defaultContext posts 
-            
-            let teaserCtx = teaserField "teaser" "content" `mappend` defaultContext
 
-            let blogpostsCtx =
+            let teaserCtx = teaserField "teaser" "content" `mappend` postCtx
+            
+            let postsCtx =
+                    --listField "posts" postCtx (return posts) `mappend`
                     constField "title" "Personal blog"  `mappend`
                     constField "posts" posts'  `mappend`
-                    dateField "published" "YYYY-MM-DD" `mappend`
-                    teaserCtx
+                    postCtx
             
             makeItem ""
-                >>= loadAndApplyTemplate "templates/blog.html" blogpostsCtx
-                >>= loadAndApplyTemplate "templates/default.html" blogpostsCtx
+                >>= loadAndApplyTemplate "templates/blog.html" postsCtx
+                >>= loadAndApplyTemplate "templates/default.html" postsCtx
                 >>= relativizeUrls
 
     -- Templates
@@ -72,4 +70,7 @@ config = defaultConfiguration
     { deployCommand = "cp -r _site/* .."
     }
 
-
+postCtx :: Context String
+postCtx = 
+    dateField "published" "YYYY-MM-DD" `mappend`
+    defaultContext
