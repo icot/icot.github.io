@@ -60,6 +60,7 @@ main = hakyllWith config $ do
             let blogpostsCtx =
                     constField "title" "Personal blog"  `mappend`
                     constField "posts" posts'  `mappend`
+                    dateField "published" "YYYY-MM-DD" `mappend`
                     defaultContext
 
             makeItem ""
