@@ -1,0 +1,13 @@
+---
+title: Second Post. Testing previews
+author: icot
+published: 2015-02-15
+---
+
+After finishing the update process and manage to re-compile the project with a
+little change, now let's see how blog posts preview work.
+
+<!--more-->
+
+Or more accurately, if I can get them working!
+

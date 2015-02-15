@@ -2,6 +2,13 @@
     $for(posts)$
         <li>
             <a href="$url$">$title$</a> - $date$
+            <p>
+            $if(teaser)$
+                $teaser$
+            $else$
+                $body$
+            $endif$
+            </p>
         </li>
     $endfor$
 </ul>

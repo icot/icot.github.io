@@ -24,16 +24,6 @@ main = hakyllWith config $ do
         route   idRoute
         compile copyFileCompiler
 
-    -- Haddock stuff
-    match "reference/**.html" $ do
-        route   idRoute
-        compile $ fmap (withUrls hackage) <$> getResourceString
-
-    -- Haddock stuff
-    match ("reference/**" `mappend` complement "**.html") $ do
-        route   idRoute
-        compile copyFileCompiler
-
     -- Pages
     match "*.markdown" $ do
         route   $ setExtension "html"
@@ -44,7 +34,9 @@ main = hakyllWith config $ do
     -- Posts
     match "posts/*" $ do
         route   $ setExtension "html"
-        compile $ pandocCompilerWith defaultHakyllReaderOptions withToc
+        compile $
+            pandocCompiler
+            >>= saveSnapshot "content"
             >>= loadAndApplyTemplate "templates/blog-post.html" defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
@@ -53,19 +45,23 @@ main = hakyllWith config $ do
     create ["blog.html"] $ do
         route idRoute
         compile $ do
-            posts <- loadAll "posts/*"
-            itemTpl   <- loadBody "templates/blog-item.html"
-            posts' <- applyTemplateList itemTpl defaultContext posts
+            posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
+            itemTpl <- loadBody "templates/blog-item.html"
+            posts' <- applyTemplateList itemTpl defaultContext posts 
+            
+            let teaserCtx = teaserField "teaser" "content" `mappend` defaultContext
 
             let blogpostsCtx =
                     constField "title" "Personal blog"  `mappend`
                     constField "posts" posts'  `mappend`
                     dateField "published" "YYYY-MM-DD" `mappend`
-                    defaultContext
-
+                    teaserCtx
+            
             makeItem ""
                 >>= loadAndApplyTemplate "templates/blog.html" blogpostsCtx
                 >>= loadAndApplyTemplate "templates/default.html" blogpostsCtx
+             --   >>= loadAndApplyTemplate "templates/blog-item.html"
+             --       (teaserField "teaser" "content" <> blogpostsCtx)
                 >>= relativizeUrls
 
     -- Templates
@@ -85,30 +81,3 @@ config = defaultConfiguration
     }
 
 
---------------------------------------------------------------------------------
--- | Turns
---
--- > /usr/share/doc/ghc/html/libraries/base-4.6.0.0/Data-String.html
---
--- into
---
--- > http://hackage.haskell.org/packages/archive/base/4.6.0.0/doc/html/Data-String.html
-hackage :: String -> String
-hackage url
-    | "/usr" `isPrefixOf` url =
-        "http://hackage.haskell.org/packages/archive/" ++
-        packageName ++ "/" ++ version' ++ "/doc/html/" ++ baseName
-    | otherwise               = url
-  where
-    (packageName, version')  = second (drop 1) $ break (== '-') package
-    (baseName : package : _) = map dropTrailingPathSeparator $
-        reverse $ splitPath url
-
-
---------------------------------------------------------------------------------
--- | Partition tutorials into tutorial series & other articles
-partitionTutorials :: [Item a] -> ([Item a], [Item a])
-partitionTutorials = partition $ \i ->
-    case splitPath (toFilePath $ itemIdentifier i) of
-        [_, (x : _)] -> isDigit x
-        _            -> False
