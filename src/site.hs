@@ -1,26 +1,20 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-import           Control.Applicative ((<$>))
-import           Control.Arrow       (second)
-import           Control.Monad       (forM_)
-import           Data.Char           (isDigit)
-import           Data.List           (isPrefixOf, partition, sortBy)
 import           Data.Monoid         (mappend)
-import           Data.Ord            (comparing)
 import           Hakyll
-import           System.FilePath     (dropTrailingPathSeparator, splitPath)
 import           Text.Pandoc
 
 
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyllWith config $ do
+    
+    -- Static directories
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler
 
-    -- Static directories
-    forM_ ["images/*", "examples/*"] $ \f -> match f $ do
+    match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
 
@@ -36,7 +30,7 @@ main = hakyllWith config $ do
         route   $ setExtension "html"
         compile $
             pandocCompiler
-            >>= saveSnapshot "content"
+            >>= saveSnapshot "content" -- Saving snapshot for the teaser
             >>= loadAndApplyTemplate "templates/blog-post.html" defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
@@ -60,8 +54,6 @@ main = hakyllWith config $ do
             makeItem ""
                 >>= loadAndApplyTemplate "templates/blog.html" blogpostsCtx
                 >>= loadAndApplyTemplate "templates/default.html" blogpostsCtx
-             --   >>= loadAndApplyTemplate "templates/blog-item.html"
-             --       (teaserField "teaser" "content" <> blogpostsCtx)
                 >>= relativizeUrls
 
     -- Templates
