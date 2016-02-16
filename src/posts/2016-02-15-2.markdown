@@ -1,0 +1,16 @@
+---
+title: Code Syntax test
+author: icot
+published: 2016-02-15
+---
+
+This is normal text
+
+``` haskell
+fac n = foldr (*) 1 [1..n]
+```
+
+``` perl
+my $a = "test";
+```
+More normal text
