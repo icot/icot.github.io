@@ -1,9 +1,0 @@
----
-title: A year later
-author: icot
-published: 2016-02-15
----
-
-There might be something happenning around this date which makes think
-of having a blog ...
-
