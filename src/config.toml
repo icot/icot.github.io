@@ -52,15 +52,14 @@ paginate = 10
   # by entering your username or ID.
 
   # SNS microblogging
-  twitter = "*"
+  twitter = "icotc"
 
   # SNS career oriented
-  linkedin = "*"
+  linkedin = "icotc"
 
   # SNS news
   hackernews = "icot"
 
   # Techie
   github = "icot"
-  stackoverflow = "icot"
 
