@@ -4,6 +4,7 @@ title = "Icot"
 copyright = "&copy; 2017. All rights reserved."
 canonifyurls = true
 paginate = 10
+publishDir = "../"
 
 [indexes]
   tag = "tags"

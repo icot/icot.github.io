@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Icot</title>
+    <link>http://icot.github.io/</link>
+    <description>Recent content on Icot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017. All rights reserved.</copyright>
+    <lastBuildDate>Sun, 11 Jun 2017 22:35:23 +0200</lastBuildDate>
+    
+	<atom:link href="http://icot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>about</title>
+      <link>http://icot.github.io/about/</link>
+      <pubDate>Sun, 11 Jun 2017 22:35:23 +0200</pubDate>
+      
+      <guid>http://icot.github.io/about/</guid>
+      <description>Bla Blah</description>
+    </item>
+    
+    <item>
+      <title>first</title>
+      <link>http://icot.github.io/post/first/</link>
+      <pubDate>Sun, 11 Jun 2017 19:33:40 +0200</pubDate>
+      
+      <guid>http://icot.github.io/post/first/</guid>
+      <description>Standard first port to test scaffolding generation</description>
+    </item>
+    
+  </channel>
+</rss>
