@@ -3,8 +3,8 @@ languageCode = "en-us"
 title = "Icot"
 copyright = "&copy; 2017. All rights reserved."
 canonifyurls = true
-paginate = 10
-publishDir = ".."
+paginate = 10 
+publishDir = "../docs"
 
 [indexes]
   tag = "tags"
@@ -46,16 +46,12 @@ publishDir = ".."
 [social]
   # Link your social networking accounts to the side menu
   # by entering your username or ID.
-
   # SNS microblogging
   twitter = "icotc"
-
   # SNS career oriented
   linkedin = "icotc"
-
   # SNS news
   hackernews = "icot"
-
   # Techie
   github = "icot"
 

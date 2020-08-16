@@ -1,0 +1,32 @@
+---
+title: "Test"
+date: 2020-07-02T22:36:06+02:00
+draft: false
+---
+
+* What to do
+*** TODO Make screenshots
+** NEXT [#A] Crete website
+** NEXT Publish webs
+*** web 1
+*** web 2
+* Working with source code
+- list 1
+- list 2
++ list
++ list
+1. A
+2. B
+  - a2
+  - a1
+
+[[~/.zshrc]]
+
+* item
+[[~/cernbox/star-wars.png]]
+
+#+BEGIN_SRC python
+def a(b:str):
+    print("hola")
+#+END_SRC
+

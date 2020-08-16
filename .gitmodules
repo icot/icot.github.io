@@ -1,3 +1,6 @@
-[submodule "src/themes/blackburn"]
-	path = src/themes/blackburn
-    url = https://github.com/yoshiharuyamashita/blackburn.git
+[submodule "src/themes/smol"]
+	path = src/themes/smol
+	url = https://github.com/colorchestra/smol
+[submodule "src/themes/Binario"]
+	path = src/themes/Binario
+	url = https://github.com/Vimux/Binario.git
