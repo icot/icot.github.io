@@ -26,8 +26,6 @@
 			
 			<a href="https://icot.github.io/about/"><b>About</b></a>.
 			
-			<a href="https://icot.github.io/"><b>Home</b></a>.
-			
 	</nav>
 	</p>
 	
@@ -41,32 +39,32 @@
 		       
 
 			<div>
-				<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"> <span style="color:#75715e">#!/usr/bin/python</span>
+				<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"> <span style="color:#0f0">#!/usr/bin/python</span>
 
- <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">FUN_004005dc</span>(param_1):
+ <span style="color:#f00">def</span> <span style="color:#ff0">FUN_004005dc</span>(param_1):
 
-     buf1 <span style="color:#f92672">=</span> (param_1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x55</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x1f</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>
-     <span style="color:#66d9ef">if</span> (param_1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x55</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
-         buf1 <span style="color:#f92672">=</span> buf1 <span style="color:#f92672">|</span> <span style="color:#ae81ff">0x10</span>
-     buf2 <span style="color:#f92672">=</span> buf1 <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>
-     <span style="color:#66d9ef">if</span> (buf1 <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
-         buf2 <span style="color:#f92672">=</span> buf2 <span style="color:#f92672">|</span> <span style="color:#ae81ff">0x10</span>
-     buf1 <span style="color:#f92672">=</span> buf2 <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>
-     <span style="color:#66d9ef">if</span> (buf2 <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
-         buf1 <span style="color:#f92672">=</span> buf1 <span style="color:#f92672">|</span> <span style="color:#ae81ff">0x10</span>
-     <span style="color:#66d9ef">return</span> buf1 <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x1f</span>
+     buf1 = (param_1 + <span style="color:#f60">0x55</span> &amp; <span style="color:#f60">0x1f</span>) &gt;&gt; <span style="color:#f60">1</span>
+     <span style="color:#f00">if</span> (param_1 + <span style="color:#f60">0x55</span> &amp; <span style="color:#f60">1</span>) != <span style="color:#f60">0</span>:
+         buf1 = buf1 | <span style="color:#f60">0x10</span>
+     buf2 = buf1 &gt;&gt; <span style="color:#f60">1</span>
+     <span style="color:#f00">if</span> (buf1 &amp; <span style="color:#f60">1</span>) != <span style="color:#f60">0</span>:
+         buf2 = buf2 | <span style="color:#f60">0x10</span>
+     buf1 = buf2 &gt;&gt; <span style="color:#f60">1</span>
+     <span style="color:#f00">if</span> (buf2 &amp; <span style="color:#f60">1</span>) != <span style="color:#f60">0</span>:
+         buf1 = buf1 | <span style="color:#f60">0x10</span>
+     <span style="color:#f00">return</span> buf1 * <span style="color:#f60">3</span> &amp; <span style="color:#f60">0x1f</span>
 
- <span style="color:#66d9ef">if</span> __name__<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;__main__&#34;</span>:
-     ipos <span style="color:#f92672">=</span> {}
-     <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">32</span>):
-       ipos[FUN_004005dc(p)] <span style="color:#f92672">=</span> p
-     <span style="color:#66d9ef">print</span>(ipos)
+ <span style="color:#f00">if</span> __name__==<span style="color:#87ceeb">&#34;__main__&#34;</span>:
+     ipos = {}
+     <span style="color:#f00">for</span> p in range(<span style="color:#f60">32</span>):
+       ipos[FUN_004005dc(p)] = p
+     print(ipos)
 
-     buf <span style="color:#f92672">=</span> bytearray(<span style="color:#e6db74">&#34;89349536319392163324855876422573&#34;</span>)
-     inp <span style="color:#f92672">=</span> bytearray(<span style="color:#e6db74">&#34;89349536319392163324855876422573&#34;</span>)
-     <span style="color:#66d9ef">for</span> p <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0x20</span>):
-         inp[ipos[p]] <span style="color:#f92672">=</span> buf[p]
-     <span style="color:#66d9ef">print</span>(inp)
+     buf = bytearray(<span style="color:#87ceeb">&#34;89349536319392163324855876422573&#34;</span>)
+     inp = bytearray(<span style="color:#87ceeb">&#34;89349536319392163324855876422573&#34;</span>)
+     <span style="color:#f00">for</span> p in range(<span style="color:#f60">0x20</span>):
+         inp[ipos[p]] = buf[p]
+     print(inp)
 
 </code></pre></div>
 			</div>
