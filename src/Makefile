@@ -1,4 +1,4 @@
-THEME=blackburn
+THEME=Binario
 
 build:
 	hugo -t ${THEME}

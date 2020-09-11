@@ -22,6 +22,11 @@ publishDir = "../docs"
   custom_css = ["css/my.css"]
   custom_js = ["js/my.js"]
 
+[params.utteranc]
+  enable = true
+  repo = "icot/icot.github.io"    # The repo to store comments
+  issueTerm = "pathname"
+
 [markup]
   [markup.highlight]
     codeFences = true
