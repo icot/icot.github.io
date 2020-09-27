@@ -1,0 +1,22 @@
+diff --git a/layouts/partials/comments.html b/layouts/partials/comments.html
+index 1678d60..1e10640 100644
+--- a/layouts/partials/comments.html
++++ b/layouts/partials/comments.html
+@@ -1,5 +1,11 @@
+-{{ if and (.Site.DisqusShortname) (.Param "comments") (not .Site.IsServer) }}
+-<section class="comments block">
+-	{{ template "_internal/disqus.html" . }}
+-</section>
+-{{ end }}
+\ No newline at end of file
++{{ if .Site.Params.utteranc.enable }}
++<div class="post bg-white">
++    <script src="https://utteranc.es/client.js"
++            repo= "{{ .Site.Params.utteranc.repo }}"
++            issue-term="{{ .Site.Params.utteranc.issueTerm }}"
++            crossorigin="anonymous"
++            theme="photon-dark"
++            async>
++    </script>
++</div>
++{{ end }}
