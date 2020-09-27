@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#1b1b1b">
+	<title>Terminal emulators | Icot</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	<link rel="stylesheet" href="https://icot.github.io/css/bundle.css">
+	<link rel="icon" href="https://icot.github.io/icons/16.png" sizes="16x16" type="image/png">
+	<link rel="icon" href="https://icot.github.io/icons/32.png" sizes="32x32" type="image/png">
+		
+</head>
+<body>
+	<header class="header">
+	<a class="logo" href="https://icot.github.io/">Icot</a>
+	
+<nav class="main-nav" role="navigation">
+	<button id="toggle" class="main-nav__btn" aria-label="Menu toggle" aria-expanded="false" tabindex="0">
+		<div class="main-nav__btn-box" tabindex="-1">
+			<svg class="main-nav__icon icon-menu" width="18" height="18" viewBox="0 0 18 18">
+				<path class="icon-menu__burger" d="M18 0v3.6H0V0h18zM0 10.8h18V7.2H0v3.6zM0 18h18v-3.6H0V18z"/>
+				<path class="icon-menu__x" d="M11.55 9L18 15.45 15.45 18 9 11.55 2.55 18 0 15.45 6.45 9 0 2.55 2.55 0 9 6.45 15.45 0 18 2.55 11.55 9z"/>
+			</svg>
+		</div>
+	</button>
+	<ul id="menu" class="main-nav__list">
+			<li class="main-nav__item">
+				<a class="main-nav__link" href="https://icot.github.io/post/">
+					<i class='fa fa-list fa-fw'></i>
+					<span class="main-nav__text">Posts</span>
+					
+				</a>
+			</li>
+			<li class="main-nav__item">
+				<a class="main-nav__link" href="https://icot.github.io/about/">
+					<i class='fa fa-user fa-fw'></i>
+					<span class="main-nav__text">About</span>
+					
+				</a>
+			</li>
+	</ul>
+</nav>
+</header>
+	<div class="primary">
+	
+	<main class="main">
+		
+		<div class="single block">
+			<article class="entry">
+				<h1 class="entry__title">Terminal emulators</h1>
+				<div class="entry__content">
+<p>
+I&#39;ve been using the same terminal emulator (<strong><strong>rxvt</strong></strong> and latter <strong><strong>urxvt</strong></strong>) since around 2008.
+I was pretty happy with the setup, running it with <strong>urxvtd/urxvtc</strong> until I tried to play around
+with family fonts including powerline symbols, and certain unicode characters which I never
+managed to get to display correctly.</p>
+<p>
+Additionally, at some point I added a second monitor to my home setup, with a higher resolution
+(2560x1440) than the older one (1920x1080) and finding a font family/size combination that rendered
+properly in both resolutions was rather problematic, so I was open to try alternatives.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Alacritty
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>
+I had been looking into Rust CLI tools after a colleague recommended <a href="https://github.com/sharkdp/bat">bat</a>, the cat alternative.
+I&#39;m always a bit wary of the trend to re-implement <em>standard</em> tools in the latest trendy programming
+language, but as I was also interested in looking into Rust itself, I did some looking into other
+CLI tools developed in Rust, finding things like <strong>dust</strong>, <strong>fd</strong>, <strong>exa</strong> and also <a href="https://github.com/alacritty/alacritty">alacritty</a>:</p>
+<blockquote>
+<p>Alacritty is a terminal emulator with a strong focus on simplicity and
+performance. With such a strong focus on performance, included features are
+carefully considered and you can always expect Alacritty to be blazingly fast.
+By making sane choices for defaults, Alacritty requires no additional setup.
+However, it does allow configuration of many aspects of the terminal.</p>
+<p>
+The software is considered to be at a beta level of readiness – there are a few
+missing features and bugs to be fixed, but it is already used by many as a daily
+driver.</p>
+</blockquote>
+<p>
+I was curious regarding the GPU gimmick, so I cloned the repository and built it locally and was quickly 
+very satisfied with a few things:</p>
+<ol>
+<li>
+<p><strong>Very</strong> fast feeling (in terms of latency), specially when used with TMUX, in comparison with <strong>urxvt</strong>.</p>
+</li>
+<li>
+<p>Out of the box working seamlessly with the font families I wanted to use.</p>
+</li>
+<li>
+<p>Somehow less noticeable difference in font size when using the same font size in both monitors side 
+to side. I don&#39;t really understand how and why, but felt better to the eye.</p>
+</li>
+</ol>
+<p>I instantly started using it as my main terminal and have used it exclusively with no major issue
+for the last ~5 months, until I tried <a href="https://sw.kovidgoyal.net/kitty/">kitty</a> last week.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Kitty
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>
+I had heard about <strong>kitty</strong> before, but for some reason assumed it was more OS X oriented as 
+most of the people recommending it in forums where using it on that system.</p>
+<p>
+After hearing about it again in a HackerNews thread I did a bit of reading and found out that:</p>
+<ol>
+<li>
+<p>It&#39;s also GPU based like <strong>alacritty</strong></p>
+</li>
+<li>
+<p>Not looking to be minimal, more rich feature setup: tab and multiplexing support</p>
+</li>
+<li>
+<p>Available in <strong>Debian</strong> testing repositories, which I use</p>
+</li>
+</ol>
+<p>I missed tab support with <strong>alacritty</strong>, as I used the functionality with <strong>urxvt</strong> and like it for
+some of my workflows.</p>
+<p>
+I needed to add some minimal modifications to the default configuration, mostly to switch
+the main modifier from Ctrl+Shift to just Ctrl, and then to disable some duplicated key mappings
+after changing the main modifier which conflicted with some of my shell keybindings.</p>
+<p>
+The latency feeling is equally fast as <strong>alacritty</strong>, but the fact that <strong>kitty</strong> is already
+a Debian package, plus the tab support are winner qualities for me.</p>
+<div id="outline-container-headline-3" class="outline-4">
+<h4 id="headline-3">
+~/.config/kitty/kitty.conf
+</h4>
+<div id="outline-text-headline-3" class="outline-text-4">
+<div class="src src-python">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#0f0"># General behaviour</span>
+allow_remote_control true
+strip_trailing_spaces true
+copy_on_select true
+
+<span style="color:#0f0"># Font</span>
+font_family Source Code Pro
+font_size <span style="color:#f60">11.5</span>
+
+<span style="color:#0f0"># Theme</span>
+include ~/workspace/kitty-themes/themes/Monokai.conf
+
+<span style="color:#0f0"># Tab Bar</span>
+tab_bar_style powerline
+
+<span style="color:#0f0"># mappings</span>
+kitty_mod ctrl
+
+<span style="color:#0f0"># Disable conflicting mappings</span>
+map kitty_mod+a no_op
+map kitty_mod+c no_op
+map kitty_mod+e no_op
+map kitty_mod+r no_op</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+Throughput/Latency
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>
+I was curious about the actual differences, but measuring the latency is not trivial.
+After reading Dan Luu&#39;s articles on terminal<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup> and keyboard<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup> latency, I wanted
+to try to replicate some of the results myself (for the 3 terminal I used), and also
+was curious about the editor latency results from Pavel Fatin<sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup> and the use of
+his tool <a href="https://github.com/pavelfatin/typometer">typometer</a> but didn&#39;t manage to make it work in the first try (need to
+follow certain recommendations to ensure that no program is catching keypresses other
+than typometer), so I leave that out for now.</p>
+<p>
+I lazily (a few manual repetitions only) replicated the bandwidth tests from <sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>:</p>
+<div class="src src-zsh">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-zsh" data-lang="zsh">timeout <span style="color:#f60">64</span> sh -c <span style="color:#87ceeb">&#39;cat /dev/urandom | base32 &gt; junk.txt&#39;</span>
+timeout <span style="color:#f60">8</span> sh -c <span style="color:#87ceeb">&#39;cat junk.txt | tee junk.term_name&#39;</span></code></pre></div>
+</div>
+<table>
+<tbody>
+<tr>
+<td><strong>Throughput (MB/s)</strong></td>
+<td><strong>alacritty</strong></td>
+<td><strong>kitty</strong></td>
+<td><strong>urxvt</strong></td>
+</tr>
+<tr>
+<td><strong>standalone</strong></td>
+<td>66.8</td>
+<td>34.25</td>
+<td>52.88</td>
+</tr>
+<tr>
+<td><strong>+tmux</strong>  (%standalone)</td>
+<td>37.75 (56%)</td>
+<td>38.25 (111.6%)</td>
+<td>39 (76%)</td>
+</tr>
+<tr>
+<td><strong>latency eye test</strong></td>
+<td>very fast</td>
+<td>very fast</td>
+<td>very fast</td>
+</tr>
+<tr>
+<td><strong>latency eye test</strong> + tmux</td>
+<td>smooth</td>
+<td>smoothest</td>
+<td>clunky, text rendered in chunks</td>
+</tr>
+</tbody>
+</table>
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+Lazy test conditions and comments
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<ul>
+<li>
+<p>All tests in the same computer and conditions</p>
+</li>
+<li>
+<p>Results are a single &#34;representative&#34; value. I ran a set of executions on each setup case
+to rule out outliers, but didn&#39;t record properly the times to calculate means/stdev</p>
+</li>
+<li>
+<p>The eye tests corresponded to my personal feeling experienced when running the tests and observing
+the text scrolling down.</p>
+</li>
+<li>
+<p>I&#39;d say that the differences <strong>alacritty</strong> and <strong>kitty</strong> are very minimal. The clunkyness in the scrolling
+when using <strong>urxvt</strong> + tmux I had already noticed, but doesn&#39;t impact the actual throughput.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr class="footnotes-separatator">
+<div class="footnote-definitions">
+<div class="footnote-definition">
+<sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
+<div class="footnote-body">
+<p><a href="https://danluu.com/term-latency/">https://danluu.com/term-latency/</a></p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
+<div class="footnote-body">
+<p><a href="https://danluu.com/keyboard-latency/">https://danluu.com/keyboard-latency/</a></p>
+</div>
+</div>
+<div class="footnote-definition">
+<sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
+<div class="footnote-body">
+<p><a href="https://pavelfatin.com/typing-with-pleasure/">https://pavelfatin.com/typing-with-pleasure/</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+				
+				<footer class="entry__footer">
+					
+<div class="entry__tags">
+			<a class="entry__tag btn" href="https://icot.github.io/tags/terminal/">terminal</a>
+			<a class="entry__tag btn" href="https://icot.github.io/tags/emulator/">emulator</a>
+			<a class="entry__tag btn" href="https://icot.github.io/tags/latency/">latency</a>
+			<a class="entry__tag btn" href="https://icot.github.io/tags/kitty/">kitty</a>
+			<a class="entry__tag btn" href="https://icot.github.io/tags/alacritty/">alacritty</a>
+</div>
+					
+				</footer>
+				
+			</article>
+		</div>
+	</main>
+	
+	
+
+
+
+	
+
+	</div>
+	<footer class="footer">
+	<div class="footer__copyright">© 2020 Icot. <span class="footer__copyright-credits">Powered by <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/vimux/binario" rel="nofollow noopener" target="_blank">Binario</a> theme.</span></div>
+</footer>
+<script src="https://icot.github.io/js/menu.js"></script>
+</body>
+</html>

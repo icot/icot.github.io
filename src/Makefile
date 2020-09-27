@@ -1,4 +1,4 @@
-THEME=Binario
+THEME=binario
 
 build:
 	hugo -t ${THEME}
