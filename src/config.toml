@@ -1,6 +1,6 @@
 baseURL = "https://icot.github.io/"
 languageCode = "en-us"
-title = "Icot"
+title = "Posts"
 copyright = "&copy; 2017. All rights reserved."
 canonifyurls = true
 paginate = 10 
@@ -40,11 +40,11 @@ publishDir = "../docs"
 
 [menu]
   [[menu.main]]
-    name = "Posts"
+    name = "Tags"
     pre = "<i class='fa fa-list fa-fw'></i>"
     weight = 1
-    identifier = "post"
-    url = "/post/"
+    identifier = "tags"
+    url = "/tags/"
   [[menu.main]]
     name = "About"
     pre = "<i class='fa fa-user fa-fw'></i>"
