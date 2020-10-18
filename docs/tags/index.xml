@@ -7,7 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 26 Sep 2020 19:55:17 +0200</lastBuildDate><atom:link href="https://icot.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Oct 2020 11:16:29 +0200</lastBuildDate><atom:link href="https://icot.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>docker</title>
+      <link>https://icot.github.io/tags/docker/</link>
+      <pubDate>Sun, 18 Oct 2020 11:16:29 +0200</pubDate>
+      
+      <guid>https://icot.github.io/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nextcloud</title>
+      <link>https://icot.github.io/tags/nextcloud/</link>
+      <pubDate>Sun, 18 Oct 2020 11:16:29 +0200</pubDate>
+      
+      <guid>https://icot.github.io/tags/nextcloud/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>alacritty</title>
       <link>https://icot.github.io/tags/alacritty/</link>

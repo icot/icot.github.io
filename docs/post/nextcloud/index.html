@@ -5,13 +5,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#1b1b1b">
-	<title>Tags | Posts</title>
+	<title>Nextcloud home deployment | Posts</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="https://icot.github.io/css/bundle.css">
 	<link rel="icon" href="https://icot.github.io/icons/16.png" sizes="16x16" type="image/png">
 	<link rel="icon" href="https://icot.github.io/icons/32.png" sizes="32x32" type="image/png">
-	<link rel="alternate" type="application/rss+xml" href="https://icot.github.io/tags/index.xml" title="Posts">
 		
 </head>
 <body>
@@ -28,12 +27,12 @@
 		</div>
 	</button>
 	<ul id="menu" class="main-nav__list">
-			<li class="main-nav__item main-nav__item--active">
-				
+			<li class="main-nav__item">
+				<a class="main-nav__link" href="https://icot.github.io/tags/">
 					<i class='fa fa-list fa-fw'></i>
 					<span class="main-nav__text">Tags</span>
 					
-				
+				</a>
 			</li>
 			<li class="main-nav__item">
 				<a class="main-nav__link" href="https://icot.github.io/about/">
@@ -49,57 +48,84 @@
 	
 	<main class="main">
 		
-		<div class="page block">
-			<h1 class="page__title">Tags</h1>
-			
-		</div>
-		<div class="cards">
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/tags/docker/">docker</a></h1>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/tags/nextcloud/">nextcloud</a></h1>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/tags/alacritty/">alacritty</a></h1>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/tags/emulator/">emulator</a></h1>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/tags/kitty/">kitty</a></h1>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/tags/latency/">latency</a></h1>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/tags/terminal/">terminal</a></h1>
-</article>
-				</div>
-			
+		<div class="single block">
+			<article class="entry">
+				<h1 class="entry__title">Nextcloud home deployment</h1>
+				<div class="entry__content"><p>
+I wanted </p>
+<p>
+https://civihosting.com/blog/nextcloud-vs-owncloud/</p>
+<div class="src src-docker">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker">version: <span style="color:#87ceeb">&#39;3.7&#39;</span>
+
+volumes:
+  nextcloud:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/local-storage
+  ssl_private:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/ssl
+  apache_conf:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/apache2/
+
+services:
+  app:
+    image: nextcloud:apache
+    restart: always
+    environment:
+      POSTGRES_DB: nextcloud 
+      POSTGRES_USER: nextcloud 
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432 
+    ports:
+      - 0.0.0.0:8080:80
+      - 0.0.0.0:8443:443
+    volumes:
+      - nextcloud:/var/www/html
+      - ssl_private:/etc/ssl/private
+      - apache_conf:/etc/apache2</code></pre></div>
+</div>
+</div>
+				
+				<footer class="entry__footer">
+					
+<div class="entry__tags">
+			<a class="entry__tag btn" href="https://icot.github.io/tags/nextcloud/">nextcloud</a>
+			<a class="entry__tag btn" href="https://icot.github.io/tags/docker/">docker</a>
+</div>
+					
+				</footer>
+				
+			</article>
 		</div>
 	</main>
 	
+	
+
+
+
+	
+<div class="post bg-white">
+    <script src="https://utteranc.es/client.js"
+            repo= "icot/icot.github.io"
+            issue-term="pathname"
+            crossorigin="anonymous"
+            theme="photon-dark"
+            async>
+    </script>
+</div>
+
+
 
 	</div>
 	<footer class="footer">

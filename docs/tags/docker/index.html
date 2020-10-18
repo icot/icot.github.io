@@ -5,13 +5,13 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#1b1b1b">
-	<title>Posts | Posts</title>
+	<title>docker | Posts</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="https://icot.github.io/css/bundle.css">
 	<link rel="icon" href="https://icot.github.io/icons/16.png" sizes="16x16" type="image/png">
 	<link rel="icon" href="https://icot.github.io/icons/32.png" sizes="32x32" type="image/png">
-	<link rel="alternate" type="application/rss+xml" href="https://icot.github.io/post/index.xml" title="Posts">
+	<link rel="alternate" type="application/rss+xml" href="https://icot.github.io/tags/docker/index.xml" title="Posts">
 		
 </head>
 <body>
@@ -50,7 +50,7 @@
 	<main class="main">
 		
 		<div class="page block">
-			<h1 class="page__title">Posts</h1>
+			<h1 class="page__title">docker</h1>
 			
 		</div>
 		<div class="cards">
@@ -60,51 +60,6 @@
 	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/post/nextcloud/">Nextcloud home deployment</a></h1>
 	<div class="entry__content"> I wanted  https://civihosting.com/blog/nextcloud-vs-owncloud/
 version: &#39;3.7&#39; volumes: nextcloud: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/local-storage ssl_private: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/ssl apache_conf: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/apache2/ services: app: image: nextcloud:apache restart: always environment: POSTGRES_DB: nextcloud POSTGRES_USER: nextcloud POSTGRES_PASSWORD: XXXXXXXXX POSTGRES_HOST: A.B.C.D:5432 ports: - 0.0.0.0:8080:80 - 0.0.0.0:8443:443 volumes: - nextcloud:/var/www/html - ssl_private:/etc/ssl/private - apache_conf:/etc/apache2  </div>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/post/terminal/">Terminal emulators</a></h1>
-	<div class="entry__content">I&#39;ve been using the same terminal emulator (rxvt and latter urxvt) since around 2008. I was pretty happy with the setup, running it with urxvtd/urxvtc until I tried to play around with family fonts including powerline symbols, and certain unicode characters which I never managed to get to display correctly.
- Additionally, at some point I added a second monitor to my home setup, with a higher resolution (2560x1440) than the older one (1920x1080) and finding a font family/size combination that rendered properly in both resolutions was rather problematic, so I was open to try alternatives.</div>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/post/test/">Test</a></h1>
-	<div class="entry__content">What to do  TODO Make screenshots   NEXT [#A] Crete website   NEXT Publish webs  web 1   web 2       Working with source code    list 1
-  list 2
-  list
-  list
-    A
-  B
-  a2
-  a1
-    ~/.zshrc</div>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/post/testcode/">Testcode</a></h1>
-	<div class="entry__content">#!/usr/bin/python def FUN_004005dc(param_1): buf1 = (param_1 + 0x55 &amp; 0x1f) &gt;&gt; 1 if (param_1 + 0x55 &amp; 1) != 0: buf1 = buf1 | 0x10 buf2 = buf1 &gt;&gt; 1 if (buf1 &amp; 1) != 0: buf2 = buf2 | 0x10 buf1 = buf2 &gt;&gt; 1 if (buf2 &amp; 1) != 0: buf1 = buf1 | 0x10 return buf1 * 3 &amp; 0x1f if __name__==&#34;__main__&#34;: ipos = {} for p in range(32): ipos[FUN_004005dc(p)] = p print(ipos) buf = bytearray(&#34;89349536319392163324855876422573&#34;) inp = bytearray(&#34;89349536319392163324855876422573&#34;) for p in range(0x20): inp[ipos[p]] = buf[p] print(inp) </div>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/post/laundry-files/">The Laundry Files</a></h1>
-	<div class="entry__content">The Laundry files The Laundry files are a series of books by Charles Stross.
-The Atrocity Archives The Jennifer Morgue The Fuller Memorandum The Apocalypse Codex </div>
-</article>
-				</div>
-			
-				<div class="card card--2col">
-					<article class="entry card__box block">
-	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/post/first/">first</a></h1>
-	<div class="entry__content">Standard first port to test scaffolding generation</div>
 </article>
 				</div>
 			

@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 26 Sep 2020 19:55:17 +0200</lastBuildDate><atom:link href="https://icot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 18 Oct 2020 11:16:29 +0200</lastBuildDate><atom:link href="https://icot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nextcloud home deployment</title>
+      <link>https://icot.github.io/post/nextcloud/</link>
+      <pubDate>Sun, 18 Oct 2020 11:16:29 +0200</pubDate>
+      
+      <guid>https://icot.github.io/post/nextcloud/</guid>
+      <description> I wanted  https://civihosting.com/blog/nextcloud-vs-owncloud/
+version: &amp;#39;3.7&amp;#39; volumes: nextcloud: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/local-storage ssl_private: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/ssl apache_conf: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/apache2/ services: app: image: nextcloud:apache restart: always environment: POSTGRES_DB: nextcloud POSTGRES_USER: nextcloud POSTGRES_PASSWORD: XXXXXXXXX POSTGRES_HOST: A.B.C.D:5432 ports: - 0.0.0.0:8080:80 - 0.0.0.0:8443:443 volumes: - nextcloud:/var/www/html - ssl_private:/etc/ssl/private - apache_conf:/etc/apache2  </description>
+    </item>
+    
     <item>
       <title>Terminal emulators</title>
       <link>https://icot.github.io/post/terminal/</link>
