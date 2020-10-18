@@ -51,12 +51,217 @@
 		<div class="single block">
 			<article class="entry">
 				<h1 class="entry__title">Nextcloud home deployment</h1>
-				<div class="entry__content"><p>
-I wanted </p>
+				<div class="entry__content">
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Intro
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
 <p>
-https://civihosting.com/blog/nextcloud-vs-owncloud/</p>
-<div class="src src-docker">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker">version: <span style="color:#87ceeb">&#39;3.7&#39;</span>
+I wanted to play with a home setup alternative to Cloud services like Dropbox or
+Google Drive with basically only one requirement: there should be working clients
+for all the systems I use: Linux, Android and Windows.</p>
+<p>
+The first thing I wanted to play with is note synchronization among all my 
+devices, for which nowadays I&#39;m using mainly two tools:</p>
+<ul>
+<li>
+<p>Joplin (joplin-cli) for Markdown based notes</p>
+</li>
+<li>
+<p>Emacs org-mode and Orgzly on Android</p>
+</li>
+</ul>
+<p>The biggest restrictions for the setup came from the Android clients, in particular Orgzly:</p>
+<ul>
+<li>
+<p>Both Joplin and Orgzly work with Dropbox out of the box (Joplin also supports Nextcloud out of the box)</p>
+</li>
+<li>
+<p>Both support WebDAV for syncing, but Orgzly will only work with services over HTTPS</p>
+</li>
+<li>
+<p>Both support syncing to a local folder which could then be synced externally with whatever method you want to use</p>
+</li>
+</ul>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Nextcloud vs Owncloud
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>
+The two biggest solutions on the home cloud space seem to be Nextcloud and Owncloud.
+Nextcloud is actually a fork of Owncloud from the original developer.</p>
+<p>
+A work we use a custom solution based in Owncloud and my experience with the android client
+is particularly bad. I tried to sync a local folder for some quick tests with Orgzly 
+and the syncing kept breaking, with the client ending in an unresponsive state and needing
+a cold restart. </p>
+<p>
+Just because of that I decided to try Nextcloud instead for this setup.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+First execution
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>
+I launched a quick instance using docker following the recommended instructions
+in the Docker Hub <a href="https://hub.docker.com/_/nextcloud">Nextcloud</a> guide to get a feel of the application.</p>
+<p>
+After playing a bit and reading the rest of the sections in the link, I opted to
+override the default apache config to enable SSL, use an external database, and
+set a volume for the actual data.</p>
+<p>
+I extracted the default apache config from the running container with </p>
+<div class="src src-bash">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir apache2
+docker cp nextcloud_app_1:/etc/apache2 ./apache2</code></pre></div>
+</div>
+<p>
+You can do the same with <strong>/var/www/html</strong> to get a copy of the application data,
+or you can run docker with a volume mapping to a local empty folder and the installation
+process will setup things there (You will want to do this to keep your data in some permanent
+ storage solution anyway).</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+Customizing configuration
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+SSL Certificates
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>
+Because of the Orgzly requirement for HTTPS I needed to reconfigure apache to serve using
+TLS.</p>
+<p>
+I use a dynamic DNS domain name provided by <a href="www.duckdns.org">duckdns</a> to access my home network from the internet
+via Wireguard.  With this setup, and Let&#39;s encrypt support for DNS based certificate requests
+I obtained a wildcard certificate (so I can reuse it for other internal services) using <a href="https://go-acme.github.io/lego/">Lego</a>:</p>
+<div class="src src-bash">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#eedd82">DUCKDNS_TOKEN</span>=XXXXXXXXXXXXXXXXXXXXXXXXXX <span style="color:#87ceeb">\
+</span><span style="color:#87ceeb"></span> lego --dns duckdns --domains <span style="color:#87ceeb">&#34;*.yourdomain.duckdns.org&#34;</span> --email your.email@whatever.place run</code></pre></div>
+</div>
+<p>
+I placed a copy of the generated certificates to the local (working directory)  <strong><strong>ssl</strong></strong> folder, 
+which will be exposed to the container as a volume mounted on <strong><strong>/etc/ssl/private</strong></strong>.</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+apache configuration
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>
+With the certificates in place the following changes need to be applied to enable the apache 
+listener on 443 and use the new let&#39;s encrypt certificates:</p>
+<ul>
+<li>
+<p>Modify <strong>apache2/sites-available/default-ssl.conf</strong> so the <strong>SSLCertificateFile</strong> and <strong>SSLCertificateKeyFile</strong> match your certificate file names:</p>
+</li>
+</ul>
+<div class="src src-conf">
+<pre><code class="language-conf" data-lang="conf">    SSLCertificateFile  /etc/ssl/private/_.yourdomain.duckdns.org.crt
+    SSLCertificateKeyFile /etc/ssl/private/_.yourdomain.duckdns.org.key</code></pre>
+</div>
+<ul>
+<li>
+<p>Enable default-ssl site.</p>
+</li>
+</ul>
+<div class="src src-bash">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apache2/ $ ln -s sites-available/default-ssl.conf sites-enabled/default-ssl.conf</code></pre></div>
+</div>
+<ul>
+<li>
+<p>Enable ssl module.</p>
+</li>
+</ul>
+<div class="src src-bash">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">apache2/ $ ln -s mods-available/default-ssl.conf mods-enabled/ssl.conf
+apache2/ $ ln -s mods-available/default-ssl.load mods-enabled/ssl.load</code></pre></div>
+</div>
+<div id="outline-container-headline-7" class="outline-4">
+<h4 id="headline-7">
+Alternative method
+</h4>
+<div id="outline-text-headline-7" class="outline-text-4">
+<p>
+An alternative for the enabling/configuration is to run the container and enable
+the module and the sites with the apache management tools <strong><strong>a2enmod</strong></strong> and <strong><strong>a2ensite</strong></strong>, then
+save the changes with <strong><strong>docker cp</strong></strong>. </p>
+<p>
+<strong>Disclaimer</strong>: This is actually what I did, so the previous <em>offline</em> instructions might actually be missing something.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+Nextcloud configuration 
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<div id="outline-container-headline-9" class="outline-4">
+<h4 id="headline-9">
+External Database
+</h4>
+<div id="outline-text-headline-9" class="outline-text-4">
+<p>
+The Docker image already supports configuring an external database via the use of 
+environment variables. In my case I have one PostgreSQL instance already running in my 
+network, so I just created an account and database there and configured the values
+using environment variables in the <em>docker-compose.yaml</em> definition:</p>
+<div class="src src-yaml">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    environment:
+      POSTGRES_DB: nextcloud 
+      POSTGRES_USER: nextcloud 
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-4">
+<h4 id="headline-10">
+config/config.php trusted_domains
+</h4>
+<div id="outline-text-headline-10" class="outline-text-4">
+<p>
+If you start now the container, the application will execute correctly but accesing it through the secure
+endpoint will fail because your particular domain is not in the list of <strong>trusted_domains</strong>. The <strong>config/config.php</strong>
+file needs to be modified to add your desired domain list to the list:</p>
+<div class="src src-php">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#87ceeb">&#39;trusted_domains&#39;</span> =&gt; 
+  <span style="color:#f00">array</span> (
+    <span style="color:#f60">0</span> =&gt; <span style="color:#87ceeb">&#39;localhost:9080&#39;</span>,
+    <span style="color:#f60">1</span> =&gt; <span style="color:#87ceeb">&#39;localhost:9443&#39;</span>,
+    <span style="color:#f60">2</span> =&gt; <span style="color:#87ceeb">&#39;fqdn.your.domain.org:9080&#39;</span>,
+    <span style="color:#f60">3</span> =&gt; <span style="color:#87ceeb">&#39;fqdn.your.domain.org:9443&#39;</span>,
+  ),
+</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-2">
+<h2 id="headline-11">
+Resulting Docker Compose file
+</h2>
+<div id="outline-text-headline-11" class="outline-text-2">
+<p>
+After applying the configuration changes, the following <strong>docker-compose.yaml</strong> can be used
+to run the service with the customized configuration:</p>
+<div class="src src-yaml">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">version: <span style="color:#87ceeb">&#39;3.7&#39;</span>
 
 volumes:
   nextcloud:
@@ -88,12 +293,14 @@ services:
       POSTGRES_PASSWORD: XXXXXXXXX
       POSTGRES_HOST: A.B.C.D:5432 
     ports:
-      - 0.0.0.0:8080:80
-      - 0.0.0.0:8443:443
+      - <span style="color:#f60">0.0.0.0</span>:<span style="color:#f60">8080</span>:<span style="color:#f60">80</span>
+      - <span style="color:#f60">0.0.0.0</span>:<span style="color:#f60">8443</span>:<span style="color:#f60">443</span>
     volumes:
       - nextcloud:/var/www/html
       - ssl_private:/etc/ssl/private
       - apache_conf:/etc/apache2</code></pre></div>
+</div>
+</div>
 </div>
 </div>
 				

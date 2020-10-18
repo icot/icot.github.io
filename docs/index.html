@@ -53,8 +53,9 @@
 					<div class="card card--2col">
 					<article class="entry card__box block">
 	<h1 class="entry__title title-excerpt"><a class="entry__title-link" href="https://icot.github.io/post/nextcloud/">Nextcloud home deployment</a></h1>
-	<div class="entry__content"> I wanted  https://civihosting.com/blog/nextcloud-vs-owncloud/
-version: &#39;3.7&#39; volumes: nextcloud: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/local-storage ssl_private: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/ssl apache_conf: driver: local driver_opts: o: bind type: none device: /path/to/nextcloud/apache2/ services: app: image: nextcloud:apache restart: always environment: POSTGRES_DB: nextcloud POSTGRES_USER: nextcloud POSTGRES_PASSWORD: XXXXXXXXX POSTGRES_HOST: A.B.C.D:5432 ports: - 0.0.0.0:8080:80 - 0.0.0.0:8443:443 volumes: - nextcloud:/var/www/html - ssl_private:/etc/ssl/private - apache_conf:/etc/apache2  </div>
+	<div class="entry__content">Intro   I wanted to play with a home setup alternative to Cloud services like Dropbox or Google Drive with basically only one requirement: there should be working clients for all the systems I use: Linux, Android and Windows.
+ The first thing I wanted to play with is note synchronization among all my devices, for which nowadays I&#39;m using mainly two tools:
+  Joplin (joplin-cli) for Markdown based notes</div>
 </article>
 					</div>
 					<div class="card card--2col">
