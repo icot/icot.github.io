@@ -1,0 +1,180 @@
+#+TITLE: Nextcloud home deployment
+#+date: <2020-10-18 11:16>
+#+filetags: docker nextcloud
+
+* Intro
+
+I wanted to play with a home setup alternative to Cloud services like Dropbox or
+Google Drive with basically only one requirement: there should be working clients
+for all the systems I use: Linux, Android and Windows.
+
+The first thing I wanted to play with is note synchronization among all my 
+devices, for which nowadays I'm using mainly two tools:
+ * Joplin (joplin-cli) for Markdown based notes
+ * Emacs org-mode and Orgzly on Android
+
+The biggest restrictions for the setup came from the Android clients, in particular Orgzly:
+ * Both Joplin and Orgzly work with Dropbox out of the box (Joplin also supports Nextcloud out of the box)
+ * Both support WebDAV for syncing, but Orgzly will only work with services over HTTPS
+ * Both support syncing to a local folder which could then be synced externally with whatever method you want to use
+
+** Nextcloud vs Owncloud
+
+The two biggest solutions on the home cloud space seem to be Nextcloud and Owncloud.
+Nextcloud is actually a fork of Owncloud from the original developer.
+
+A work we use a custom solution based in Owncloud and my experience with the android client
+is particularly bad. I tried to sync a local folder for some quick tests with Orgzly 
+and the syncing kept breaking, with the client ending in an unresponsive state and needing
+a cold restart. 
+
+Just because of that I decided to try Nextcloud instead for this setup.
+
+* First execution
+
+I launched a quick instance using docker following the recommended instructions
+in the Docker Hub [[https://hub.docker.com/_/nextcloud][Nextcloud]] guide to get a feel of the application.
+
+After playing a bit and reading the rest of the sections in the link, I opted to
+override the default apache config to enable SSL, use an external database, and
+set a volume for the actual data.
+
+I extracted the default apache config from the running container with 
+#+BEGIN_EXAMPLE bash
+mkdir apache2
+docker cp nextcloud_app_1:/etc/apache2 ./apache2
+#+END_EXAMPLE
+
+You can do the same with */var/www/html* to get a copy of the application data,
+or you can run docker with a volume mapping to a local empty folder and the installation
+process will setup things there (You will want to do this to keep your data in some permanent
+ storage solution anyway).
+
+* Customizing configuration
+
+** SSL Certificates
+
+Because of the Orgzly requirement for HTTPS I needed to reconfigure apache to serve using
+TLS.
+
+I use a dynamic DNS domain name provided by Duck [[https://www.duckdns.org][Duck DNS]] to access my home network from the internet
+via Wireguard.  With this setup, and Let's encrypt support for DNS based certificate requests
+I obtained a wildcard certificate (so I can reuse it for other internal services) using [[https://go-acme.github.io/lego/][Lego]]:
+
+#+BEGIN_EXAMPLE bash
+DUCKDNS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXX \
+ lego --dns duckdns --domains "*.yourdomain.duckdns.org" --email your.email@whatever.place run
+#+END_EXAMPLE
+
+I placed a copy of the generated certificates to the local (working directory)  **ssl** folder, 
+which will be exposed to the container as a volume mounted on **/etc/ssl/private**.
+
+** apache configuration
+
+With the certificates in place the following changes need to be applied to enable the apache 
+listener on 443 and use the new let's encrypt certificates:
+
+  * Modify *apache2/sites-available/default-ssl.conf* so the *SSLCertificateFile* and *SSLCertificateKeyFile* match your certificate file names:
+
+#+BEGIN_EXAMPLE conf
+    SSLCertificateFile  /etc/ssl/private/_.yourdomain.duckdns.org.crt
+    SSLCertificateKeyFile /etc/ssl/private/_.yourdomain.duckdns.org.key
+#+END_EXAMPLE
+
+  * Enable default-ssl site.
+#+BEGIN_EXAMPLE bash
+apache2/ $ ln -s sites-available/default-ssl.conf sites-enabled/default-ssl.conf
+#+END_EXAMPLE
+  * Enable ssl module.
+#+BEGIN_EXAMPLE bash
+apache2/ $ ln -s mods-available/default-ssl.conf mods-enabled/ssl.conf
+apache2/ $ ln -s mods-available/default-ssl.load mods-enabled/ssl.load
+#+END_EXAMPLE
+
+*** Alternative method
+
+An alternative for the enabling/configuration is to run the container and enable
+the module and the sites with the apache management tools **a2enmod** and **a2ensite**, then
+save the changes with **docker cp**. 
+
+*Disclaimer*: This is actually what I did, so the previous /offline/ instructions might actually be missing something.
+
+* Nextcloud configuration 
+
+** External Database
+
+The Docker image already supports configuring an external database via the use of 
+environment variables. In my case I have one PostgreSQL instance already running in my 
+network, so I just created an account and database there and configured the values
+using environment variables in the /docker-compose.yaml/ definition:
+
+#+BEGIN_EXAMPLE yaml
+    environment:
+      POSTGRES_DB: nextcloud 
+      POSTGRES_USER: nextcloud 
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432 
+#+END_EXAMPLE
+
+** config/config.php trusted_domains
+
+If you start now the container, the application will execute correctly but accesing it through the secure
+endpoint will fail because your particular domain is not in the list of *trusted_domains*. The *config/config.php*
+file needs to be modified to add your desired domain list to the list:
+
+#+BEGIN_EXAMPLE php
+'trusted_domains' => 
+  array (
+    0 => 'localhost:9080',
+    1 => 'localhost:9443',
+    2 => 'fqdn.your.domain.org:9080',
+    3 => 'fqdn.your.domain.org:9443',
+  ),
+#+END_EXAMPLE
+
+
+* Resulting Docker Compose file
+
+After applying the configuration changes, the following *docker-compose.yaml* can be used
+to run the service with the customized configuration:
+
+#+BEGIN_EXAMPLE yaml
+version: '3.7'
+
+volumes:
+  nextcloud:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/local-storage
+  ssl_private:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/ssl
+  apache_conf:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/apache2/
+
+services:
+  app:
+    image: nextcloud:apache
+    restart: always
+    environment:
+      POSTGRES_DB: nextcloud 
+      POSTGRES_USER: nextcloud 
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432 
+    ports:
+      - 0.0.0.0:8080:80
+      - 0.0.0.0:8443:443
+    volumes:
+      - nextcloud:/var/www/html
+      - ssl_private:/etc/ssl/private
+      - apache_conf:/etc/apache2
+#+END_EXAMPLE

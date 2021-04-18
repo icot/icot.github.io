@@ -1,0 +1,128 @@
+#+TITLE: Terminal emulators
+#+date: <2020-09-26 19:55>
+#+filetags: terminal emulator latency kitty alacritty
+
+
+I've been using the same terminal emulator (**rxvt** and latter **urxvt**) since around 2008.
+I was pretty happy with the setup, running it with *urxvtd/urxvtc* until I tried to play around
+with family fonts including powerline symbols, and certain unicode characters which I never
+managed to get to display correctly.
+
+Additionally, at some point I added a second monitor to my home setup, with a higher resolution
+(2560x1440) than the older one (1920x1080) and finding a font family/size combination that rendered
+properly in both resolutions was rather problematic, so I was open to try alternatives.
+
+* Alacritty
+
+I had been looking into Rust CLI tools after a colleague recommended [[https://github.com/sharkdp/bat][bat]], the cat alternative.
+I'm always a bit wary of the trend to re-implement /standard/ tools in the latest trendy programming
+language, but as I was also interested in looking into Rust itself, I did some looking into other
+CLI tools developed in Rust, finding things like *dust*, *fd*, *exa* and also [[https://github.com/alacritty/alacritty][alacritty]]:
+
+#+BEGIN_QUOTE
+Alacritty is a terminal emulator with a strong focus on simplicity and
+performance. With such a strong focus on performance, included features are
+carefully considered and you can always expect Alacritty to be blazingly fast.
+By making sane choices for defaults, Alacritty requires no additional setup.
+However, it does allow configuration of many aspects of the terminal.
+
+The software is considered to be at a beta level of readiness -- there are a few
+missing features and bugs to be fixed, but it is already used by many as a daily
+driver.
+#+END_QUOTE
+
+I was curious regarding the GPU gimmick, so I cloned the repository and built it locally and was quickly 
+very satisfied with a few things:
+1) *Very* fast feeling (in terms of latency), specially when used with TMUX, in comparison with *urxvt*.
+2) Out of the box working seamlessly with the font families I wanted to use.
+3) Somehow less noticeable difference in font size when using the same font size in both monitors side 
+  to side. I don't really understand how and why, but felt better to the eye.
+
+I instantly started using it as my main terminal and have used it exclusively with no major issue
+for the last ~5 months, until I tried [[https://sw.kovidgoyal.net/kitty/][kitty]] last week.
+
+* Kitty
+
+I had heard about *kitty* before, but for some reason assumed it was more OS X oriented as 
+most of the people recommending it in forums where using it on that system.
+
+After hearing about it again in a HackerNews thread I did a bit of reading and found out that:
+1) It's also GPU based like *alacritty*
+2) Not looking to be minimal, more rich feature setup: tab and multiplexing support
+3) Available in *Debian* testing repositories, which I use
+
+I missed tab support with *alacritty*, as I used the functionality with *urxvt* and like it for
+some of my workflows.
+
+I needed to add some minimal modifications to the default configuration, mostly to switch
+the main modifier from Ctrl+Shift to just Ctrl, and then to disable some duplicated key mappings
+after changing the main modifier which conflicted with some of my shell keybindings.
+
+The latency feeling is equally fast as *alacritty*, but the fact that *kitty* is already
+a Debian package, plus the tab support are winner qualities for me.
+
+
+** ~/.config/kitty/kitty.conf
+
+#+BEGIN_SRC python
+# General behaviour
+allow_remote_control true
+strip_trailing_spaces true
+copy_on_select true
+
+# Font
+font_family Source Code Pro
+font_size 11.5
+
+# Theme
+include ~/workspace/kitty-themes/themes/Monokai.conf
+
+# Tab Bar
+tab_bar_style powerline
+
+# mappings
+kitty_mod ctrl
+
+# Disable conflicting mappings
+map kitty_mod+a no_op
+map kitty_mod+c no_op
+map kitty_mod+e no_op
+map kitty_mod+r no_op
+#+END_SRC
+
+* Throughput/Latency
+
+I was curious about the actual differences, but measuring the latency is not trivial.
+After reading Dan Luu's articles on terminal[fn:1] and keyboard[fn:2] latency, I wanted
+to try to replicate some of the results myself (for the 3 terminal I used), and also
+was curious about the editor latency results from Pavel Fatin[fn:3] and the use of
+his tool [[https://github.com/pavelfatin/typometer][typometer]] but didn't manage to make it work in the first try (need to
+follow certain recommendations to ensure that no program is catching keypresses other
+than typometer), so I leave that out for now.
+
+I lazily (a few manual repetitions only) replicated the bandwidth tests from [fn:1]:
+
+#+BEGIN_SRC zsh
+timeout 64 sh -c 'cat /dev/urandom | base32 > junk.txt'
+timeout 8 sh -c 'cat junk.txt | tee junk.term_name'
+#+END_SRC
+
+| *Throughput (MB/s)*| *alacritty* | *kitty* | *urxvt* |
+| *standalone* | 66.8| 34.25 | 52.88 |
+| *+tmux*  (%standalone)| 37.75 (56%) | 38.25 (111.6%) | 39 (76%) |
+| *latency eye test* | very fast | very fast | very fast |
+| *latency eye test* + tmux | smooth | smoothest | clunky, text rendered in chunks|
+
+** Lazy test conditions and comments
+- All tests in the same computer and conditions
+- Results are a single "representative" value. I ran a set of executions on each setup case
+  to rule out outliers, but didn't record properly the times to calculate means/stdev
+- The eye tests corresponded to my personal feeling experienced when running the tests and observing
+  the text scrolling down.
+- I'd say that the differences *alacritty* and *kitty* are very minimal. The clunkyness in the scrolling
+  when using *urxvt* + tmux I had already noticed, but doesn't impact the actual throughput.
+
+[fn:1] https://danluu.com/term-latency/
+[fn:2] https://danluu.com/keyboard-latency/
+[fn:3] https://pavelfatin.com/typing-with-pleasure/
+

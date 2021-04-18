@@ -1,0 +1,5 @@
+#+TITLE: Test create post with org-static-site
+#+date: <2021-01-20 14:36>
+#+filetags: test
+
+Let's see how it looks like
