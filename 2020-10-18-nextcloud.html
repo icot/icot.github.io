@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="alternate"
+      type="application/rss+xml"
+      href="https://icot.github.io/rss.xml"
+      title="RSS feed for https://icot.github.io/">
+<title>Nextcloud home deployment</title>
+<meta name="author" content="icot">
+<meta name="referrer" content="no-referrer">
+<link href="static/style.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" href="static/favicon.ico">
+</head>
+<body>
+<div id="preamble" class="status"><div class="header">  <a href="https://icot.github.io">icot.github.io</a>  <div class="sitelinks">    <a href="about.html">about</a>    | <a href="archive.html">archive</a>    | <div class="dropdown">       <a href="tags/html" class="dropbtn">tags</a>       <div class="dropdown-content"><a href="/blog/tag-alacritty.html">alacritty</a><a href="/blog/tag-docker.html">docker</a><a href="/blog/tag-emulator.html">emulator</a><a href="/blog/tag-kitty.html">kitty</a><a href="/blog/tag-latency.html">latency</a><a href="/blog/tag-nextcloud.html">nextcloud</a><a href="/blog/tag-terminal.html">terminal</a><a href="/blog/tag-test.html">test</a>       </div>      </div>    | <a href="rss.xml">rss</a>  </div></div></div>
+<div id="content">
+<div class="post-date">18 Oct 2020</div><h1 class="post-title"><a href="https://icot.github.io/2020-10-18-nextcloud.html">Nextcloud home deployment</a></h1>
+<nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org936bf3d">1. Intro</a>
+<ul>
+<li><a href="#orgc8b5363">1.1. Nextcloud vs Owncloud</a></li>
+</ul>
+</li>
+<li><a href="#orga9a008f">2. First execution</a></li>
+<li><a href="#org733e930">3. Customizing configuration</a>
+<ul>
+<li><a href="#org926169d">3.1. SSL Certificates</a></li>
+<li><a href="#org4a63bae">3.2. apache configuration</a>
+<ul>
+<li><a href="#org5f14e03">3.2.1. Alternative method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga10d8fa">4. Nextcloud configuration</a>
+<ul>
+<li><a href="#org519d192">4.1. External Database</a></li>
+<li><a href="#org16b1b8c">4.2. config/config.php trusted<sub>domains</sub></a></li>
+</ul>
+</li>
+<li><a href="#orgdbd51d8">5. Resulting Docker Compose file</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org936bf3d" class="outline-2">
+<h2 id="org936bf3d"><span class="section-number-2">1</span> Intro</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I wanted to play with a home setup alternative to Cloud services like Dropbox or
+Google Drive with basically only one requirement: there should be working clients
+for all the systems I use: Linux, Android and Windows.
+</p>
+
+<p>
+The first thing I wanted to play with is note synchronization among all my
+devices, for which nowadays I&rsquo;m using mainly two tools:
+</p>
+<ul class="org-ul">
+<li>Joplin (joplin-cli) for Markdown based notes</li>
+<li>Emacs org-mode and Orgzly on Android</li>
+</ul>
+
+<p>
+The biggest restrictions for the setup came from the Android clients, in particular Orgzly:
+</p>
+<ul class="org-ul">
+<li>Both Joplin and Orgzly work with Dropbox out of the box (Joplin also supports Nextcloud out of the box)</li>
+<li>Both support WebDAV for syncing, but Orgzly will only work with services over HTTPS</li>
+<li>Both support syncing to a local folder which could then be synced externally with whatever method you want to use</li>
+</ul>
+</div>
+
+<div id="outline-container-orgc8b5363" class="outline-3">
+<h3 id="orgc8b5363"><span class="section-number-3">1.1</span> Nextcloud vs Owncloud</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The two biggest solutions on the home cloud space seem to be Nextcloud and Owncloud.
+Nextcloud is actually a fork of Owncloud from the original developer.
+</p>
+
+<p>
+A work we use a custom solution based in Owncloud and my experience with the android client
+is particularly bad. I tried to sync a local folder for some quick tests with Orgzly
+and the syncing kept breaking, with the client ending in an unresponsive state and needing
+a cold restart.
+</p>
+
+<p>
+Just because of that I decided to try Nextcloud instead for this setup.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga9a008f" class="outline-2">
+<h2 id="orga9a008f"><span class="section-number-2">2</span> First execution</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+I launched a quick instance using docker following the recommended instructions
+in the Docker Hub <a href="https://hub.docker.com/_/nextcloud">Nextcloud</a> guide to get a feel of the application.
+</p>
+
+<p>
+After playing a bit and reading the rest of the sections in the link, I opted to
+override the default apache config to enable SSL, use an external database, and
+set a volume for the actual data.
+</p>
+
+<p>
+I extracted the default apache config from the running container with
+</p>
+<pre class="example" id="orgb82cfbb">
+mkdir apache2
+docker cp nextcloud_app_1:/etc/apache2 ./apache2
+</pre>
+
+<p>
+You can do the same with <b>/var/www/html</b> to get a copy of the application data,
+or you can run docker with a volume mapping to a local empty folder and the installation
+process will setup things there (You will want to do this to keep your data in some permanent
+ storage solution anyway).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org733e930" class="outline-2">
+<h2 id="org733e930"><span class="section-number-2">3</span> Customizing configuration</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org926169d" class="outline-3">
+<h3 id="org926169d"><span class="section-number-3">3.1</span> SSL Certificates</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Because of the Orgzly requirement for HTTPS I needed to reconfigure apache to serve using
+TLS.
+</p>
+
+<p>
+I use a dynamic DNS domain name provided by Duck <a href="https://www.duckdns.org">Duck DNS</a> to access my home network from the internet
+via Wireguard.  With this setup, and Let&rsquo;s encrypt support for DNS based certificate requests
+I obtained a wildcard certificate (so I can reuse it for other internal services) using <a href="https://go-acme.github.io/lego/">Lego</a>:
+</p>
+
+<pre class="example" id="orgde8c239">
+DUCKDNS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXX \
+ lego --dns duckdns --domains "*.yourdomain.duckdns.org" --email your.email@whatever.place run
+</pre>
+
+<p>
+I placed a copy of the generated certificates to the local (working directory)  <b><b>ssl</b></b> folder,
+which will be exposed to the container as a volume mounted on <b><b>/etc/ssl/private</b></b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4a63bae" class="outline-3">
+<h3 id="org4a63bae"><span class="section-number-3">3.2</span> apache configuration</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+With the certificates in place the following changes need to be applied to enable the apache
+listener on 443 and use the new let&rsquo;s encrypt certificates:
+</p>
+
+<ul class="org-ul">
+<li>Modify <b>apache2/sites-available/default-ssl.conf</b> so the <b>SSLCertificateFile</b> and <b>SSLCertificateKeyFile</b> match your certificate file names:</li>
+</ul>
+
+<pre class="example" id="org2898764">
+    SSLCertificateFile  /etc/ssl/private/_.yourdomain.duckdns.org.crt
+    SSLCertificateKeyFile /etc/ssl/private/_.yourdomain.duckdns.org.key
+</pre>
+
+<ul class="org-ul">
+<li>Enable default-ssl site.</li>
+</ul>
+<pre class="example" id="orgf7447ec">
+apache2/ $ ln -s sites-available/default-ssl.conf sites-enabled/default-ssl.conf
+</pre>
+<ul class="org-ul">
+<li>Enable ssl module.</li>
+</ul>
+<pre class="example" id="orgdfa7a46">
+apache2/ $ ln -s mods-available/default-ssl.conf mods-enabled/ssl.conf
+apache2/ $ ln -s mods-available/default-ssl.load mods-enabled/ssl.load
+</pre>
+</div>
+
+<div id="outline-container-org5f14e03" class="outline-4">
+<h4 id="org5f14e03"><span class="section-number-4">3.2.1</span> Alternative method</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+An alternative for the enabling/configuration is to run the container and enable
+the module and the sites with the apache management tools <b><b>a2enmod</b></b> and <b><b>a2ensite</b></b>, then
+save the changes with <b><b>docker cp</b></b>.
+</p>
+
+<p>
+<b>Disclaimer</b>: This is actually what I did, so the previous <i>offline</i> instructions might actually be missing something.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga10d8fa" class="outline-2">
+<h2 id="orga10d8fa"><span class="section-number-2">4</span> Nextcloud configuration</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org519d192" class="outline-3">
+<h3 id="org519d192"><span class="section-number-3">4.1</span> External Database</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+The Docker image already supports configuring an external database via the use of
+environment variables. In my case I have one PostgreSQL instance already running in my
+network, so I just created an account and database there and configured the values
+using environment variables in the <i>docker-compose.yaml</i> definition:
+</p>
+
+<pre class="example" id="orgcba494c">
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org16b1b8c" class="outline-3">
+<h3 id="org16b1b8c"><span class="section-number-3">4.2</span> config/config.php trusted<sub>domains</sub></h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+If you start now the container, the application will execute correctly but accesing it through the secure
+endpoint will fail because your particular domain is not in the list of <b>trusted<sub>domains</sub></b>. The <b>config/config.php</b>
+file needs to be modified to add your desired domain list to the list:
+</p>
+
+<pre class="example" id="orga27f56d">
+'trusted_domains' =&gt;
+  array (
+    0 =&gt; 'localhost:9080',
+    1 =&gt; 'localhost:9443',
+    2 =&gt; 'fqdn.your.domain.org:9080',
+    3 =&gt; 'fqdn.your.domain.org:9443',
+  ),
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgdbd51d8" class="outline-2">
+<h2 id="orgdbd51d8"><span class="section-number-2">5</span> Resulting Docker Compose file</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+After applying the configuration changes, the following <b>docker-compose.yaml</b> can be used
+to run the service with the customized configuration:
+</p>
+
+<pre class="example" id="orgd28c63f">
+version: '3.7'
+
+volumes:
+  nextcloud:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/local-storage
+  ssl_private:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/ssl
+  apache_conf:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/apache2/
+
+services:
+  app:
+    image: nextcloud:apache
+    restart: always
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432
+    ports:
+      - 0.0.0.0:8080:80
+      - 0.0.0.0:8443:443
+    volumes:
+      - nextcloud:/var/www/html
+      - ssl_private:/etc/ssl/private
+      - apache_conf:/etc/apache2
+</pre>
+</div>
+</div>
+<div class="taglist"><a href="https://icot.github.io/tags.html">Tags</a>: <a href="https://icot.github.io/tag-docker.html">docker</a> <a href="https://icot.github.io/tag-nextcloud.html">nextcloud</a> </div></div>
+<div id="postamble" class="status"><div id="archive"><a href="archive.html">Other posts</a></div>
+<center>
+  <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">
+  <img alt="Creative Commons License" style="border-width:0; height:1.5em"
+       src="https://mirrors.creativecommons.org/presskit/buttons/80x15/png/by-sa.png"/>
+  </a>
+  <br />
+  <a xmlns:cc="https://creativecommons.org/ns#" href="https://icot.github.io"
+     property="cc:attributionName" rel="cc:attributionURL">icot.github.io</a>
+  is licensed under a
+  <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">
+      Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+  <br />
+  Done with <a href="https://emacs.org">
+      <img class="inline" src="https://upload.wikimedia.org/wikipedia/commons/0/08/EmacsIcon.svg" style="height:1.5em; margin-bottom:-0.3em; opacity: 0.9;" alt="Emacs" title="Emacs"/></a>
+   , <a href="https://orgmode.org">
+          <img class="inline" src="static/org-mode-unicorn-borderless-icon.svg" alt="Org mode unicorn logo" style="height:1.5em; margin-bottom:-0.3em; opacity:0.9;" title="Org Mode"></a>
+      and <a href="https://github.com/bastibe/org-static-blog">bastibe/org-static-blog</a>
+  with the CSS theme based on <a rel="jao.io" href="https://jao.io">jao.io</>
+ <div w3-include-html="license.html"></div>
+</center>
+
+</div>
+</body>
+</html>

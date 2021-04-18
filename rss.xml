@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+<title><![CDATA[icot.github.io]]></title>
+<description><![CDATA[icot.github.io]]></description>
+<link>https://icot.github.io/</link>
+<lastBuildDate>Sun, 18 Apr 2021 13:54:50 +0200</lastBuildDate>
+<item>
+  <title><![CDATA[about]]></title>
+  <description><![CDATA[
+<p>
+TBD
+</p>
+<div class="taglist"></div>]]></description>
+  <link>https://icot.github.io/about.html</link>
+  <pubDate>Thu, 21 Jan 2021 17:51:00 +0100</pubDate>
+</item>
+<item>
+  <title><![CDATA[Test create post with org-static-site]]></title>
+  <description><![CDATA[
+<p>
+Let&rsquo;s see how it looks like
+</p>
+<div class="taglist"><a href="https://icot.github.io/tags.html">Tags</a>: <a href="https://icot.github.io/tag-test.html">test</a> </div>]]></description>
+  <category><![CDATA[test]]></category>
+  <link>https://icot.github.io/2021-01-20-org-static-site.html</link>
+  <pubDate>Wed, 20 Jan 2021 14:36:00 +0100</pubDate>
+</item>
+<item>
+  <title><![CDATA[Nextcloud home deployment]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org936bf3d">1. Intro</a>
+<ul>
+<li><a href="#orgc8b5363">1.1. Nextcloud vs Owncloud</a></li>
+</ul>
+</li>
+<li><a href="#orga9a008f">2. First execution</a></li>
+<li><a href="#org733e930">3. Customizing configuration</a>
+<ul>
+<li><a href="#org926169d">3.1. SSL Certificates</a></li>
+<li><a href="#org4a63bae">3.2. apache configuration</a>
+<ul>
+<li><a href="#org5f14e03">3.2.1. Alternative method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga10d8fa">4. Nextcloud configuration</a>
+<ul>
+<li><a href="#org519d192">4.1. External Database</a></li>
+<li><a href="#org16b1b8c">4.2. config/config.php trusted<sub>domains</sub></a></li>
+</ul>
+</li>
+<li><a href="#orgdbd51d8">5. Resulting Docker Compose file</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org936bf3d" class="outline-2">
+<h2 id="org936bf3d"><span class="section-number-2">1</span> Intro</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I wanted to play with a home setup alternative to Cloud services like Dropbox or
+Google Drive with basically only one requirement: there should be working clients
+for all the systems I use: Linux, Android and Windows.
+</p>
+
+<p>
+The first thing I wanted to play with is note synchronization among all my
+devices, for which nowadays I&rsquo;m using mainly two tools:
+</p>
+<ul class="org-ul">
+<li>Joplin (joplin-cli) for Markdown based notes</li>
+<li>Emacs org-mode and Orgzly on Android</li>
+</ul>
+
+<p>
+The biggest restrictions for the setup came from the Android clients, in particular Orgzly:
+</p>
+<ul class="org-ul">
+<li>Both Joplin and Orgzly work with Dropbox out of the box (Joplin also supports Nextcloud out of the box)</li>
+<li>Both support WebDAV for syncing, but Orgzly will only work with services over HTTPS</li>
+<li>Both support syncing to a local folder which could then be synced externally with whatever method you want to use</li>
+</ul>
+</div>
+
+<div id="outline-container-orgc8b5363" class="outline-3">
+<h3 id="orgc8b5363"><span class="section-number-3">1.1</span> Nextcloud vs Owncloud</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The two biggest solutions on the home cloud space seem to be Nextcloud and Owncloud.
+Nextcloud is actually a fork of Owncloud from the original developer.
+</p>
+
+<p>
+A work we use a custom solution based in Owncloud and my experience with the android client
+is particularly bad. I tried to sync a local folder for some quick tests with Orgzly
+and the syncing kept breaking, with the client ending in an unresponsive state and needing
+a cold restart.
+</p>
+
+<p>
+Just because of that I decided to try Nextcloud instead for this setup.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga9a008f" class="outline-2">
+<h2 id="orga9a008f"><span class="section-number-2">2</span> First execution</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+I launched a quick instance using docker following the recommended instructions
+in the Docker Hub <a href="https://hub.docker.com/_/nextcloud">Nextcloud</a> guide to get a feel of the application.
+</p>
+
+<p>
+After playing a bit and reading the rest of the sections in the link, I opted to
+override the default apache config to enable SSL, use an external database, and
+set a volume for the actual data.
+</p>
+
+<p>
+I extracted the default apache config from the running container with
+</p>
+<pre class="example" id="orgb82cfbb">
+mkdir apache2
+docker cp nextcloud_app_1:/etc/apache2 ./apache2
+</pre>
+
+<p>
+You can do the same with <b>/var/www/html</b> to get a copy of the application data,
+or you can run docker with a volume mapping to a local empty folder and the installation
+process will setup things there (You will want to do this to keep your data in some permanent
+ storage solution anyway).
+</p>
+</div>
+</div>
+
+<div id="outline-container-org733e930" class="outline-2">
+<h2 id="org733e930"><span class="section-number-2">3</span> Customizing configuration</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org926169d" class="outline-3">
+<h3 id="org926169d"><span class="section-number-3">3.1</span> SSL Certificates</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Because of the Orgzly requirement for HTTPS I needed to reconfigure apache to serve using
+TLS.
+</p>
+
+<p>
+I use a dynamic DNS domain name provided by Duck <a href="https://www.duckdns.org">Duck DNS</a> to access my home network from the internet
+via Wireguard.  With this setup, and Let&rsquo;s encrypt support for DNS based certificate requests
+I obtained a wildcard certificate (so I can reuse it for other internal services) using <a href="https://go-acme.github.io/lego/">Lego</a>:
+</p>
+
+<pre class="example" id="orgde8c239">
+DUCKDNS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXX \
+ lego --dns duckdns --domains "*.yourdomain.duckdns.org" --email your.email@whatever.place run
+</pre>
+
+<p>
+I placed a copy of the generated certificates to the local (working directory)  <b><b>ssl</b></b> folder,
+which will be exposed to the container as a volume mounted on <b><b>/etc/ssl/private</b></b>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4a63bae" class="outline-3">
+<h3 id="org4a63bae"><span class="section-number-3">3.2</span> apache configuration</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+With the certificates in place the following changes need to be applied to enable the apache
+listener on 443 and use the new let&rsquo;s encrypt certificates:
+</p>
+
+<ul class="org-ul">
+<li>Modify <b>apache2/sites-available/default-ssl.conf</b> so the <b>SSLCertificateFile</b> and <b>SSLCertificateKeyFile</b> match your certificate file names:</li>
+</ul>
+
+<pre class="example" id="org2898764">
+    SSLCertificateFile  /etc/ssl/private/_.yourdomain.duckdns.org.crt
+    SSLCertificateKeyFile /etc/ssl/private/_.yourdomain.duckdns.org.key
+</pre>
+
+<ul class="org-ul">
+<li>Enable default-ssl site.</li>
+</ul>
+<pre class="example" id="orgf7447ec">
+apache2/ $ ln -s sites-available/default-ssl.conf sites-enabled/default-ssl.conf
+</pre>
+<ul class="org-ul">
+<li>Enable ssl module.</li>
+</ul>
+<pre class="example" id="orgdfa7a46">
+apache2/ $ ln -s mods-available/default-ssl.conf mods-enabled/ssl.conf
+apache2/ $ ln -s mods-available/default-ssl.load mods-enabled/ssl.load
+</pre>
+</div>
+
+<div id="outline-container-org5f14e03" class="outline-4">
+<h4 id="org5f14e03"><span class="section-number-4">3.2.1</span> Alternative method</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+An alternative for the enabling/configuration is to run the container and enable
+the module and the sites with the apache management tools <b><b>a2enmod</b></b> and <b><b>a2ensite</b></b>, then
+save the changes with <b><b>docker cp</b></b>.
+</p>
+
+<p>
+<b>Disclaimer</b>: This is actually what I did, so the previous <i>offline</i> instructions might actually be missing something.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga10d8fa" class="outline-2">
+<h2 id="orga10d8fa"><span class="section-number-2">4</span> Nextcloud configuration</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org519d192" class="outline-3">
+<h3 id="org519d192"><span class="section-number-3">4.1</span> External Database</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+The Docker image already supports configuring an external database via the use of
+environment variables. In my case I have one PostgreSQL instance already running in my
+network, so I just created an account and database there and configured the values
+using environment variables in the <i>docker-compose.yaml</i> definition:
+</p>
+
+<pre class="example" id="orgcba494c">
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org16b1b8c" class="outline-3">
+<h3 id="org16b1b8c"><span class="section-number-3">4.2</span> config/config.php trusted<sub>domains</sub></h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+If you start now the container, the application will execute correctly but accesing it through the secure
+endpoint will fail because your particular domain is not in the list of <b>trusted<sub>domains</sub></b>. The <b>config/config.php</b>
+file needs to be modified to add your desired domain list to the list:
+</p>
+
+<pre class="example" id="orga27f56d">
+'trusted_domains' =&gt;
+  array (
+    0 =&gt; 'localhost:9080',
+    1 =&gt; 'localhost:9443',
+    2 =&gt; 'fqdn.your.domain.org:9080',
+    3 =&gt; 'fqdn.your.domain.org:9443',
+  ),
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgdbd51d8" class="outline-2">
+<h2 id="orgdbd51d8"><span class="section-number-2">5</span> Resulting Docker Compose file</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+After applying the configuration changes, the following <b>docker-compose.yaml</b> can be used
+to run the service with the customized configuration:
+</p>
+
+<pre class="example" id="orgd28c63f">
+version: '3.7'
+
+volumes:
+  nextcloud:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/local-storage
+  ssl_private:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/ssl
+  apache_conf:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /path/to/nextcloud/apache2/
+
+services:
+  app:
+    image: nextcloud:apache
+    restart: always
+    environment:
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: nextcloud
+      POSTGRES_PASSWORD: XXXXXXXXX
+      POSTGRES_HOST: A.B.C.D:5432
+    ports:
+      - 0.0.0.0:8080:80
+      - 0.0.0.0:8443:443
+    volumes:
+      - nextcloud:/var/www/html
+      - ssl_private:/etc/ssl/private
+      - apache_conf:/etc/apache2
+</pre>
+</div>
+</div>
+<div class="taglist"><a href="https://icot.github.io/tags.html">Tags</a>: <a href="https://icot.github.io/tag-docker.html">docker</a> <a href="https://icot.github.io/tag-nextcloud.html">nextcloud</a> </div>]]></description>
+  <category><![CDATA[docker]]></category>
+  <category><![CDATA[nextcloud]]></category>
+  <link>https://icot.github.io/2020-10-18-nextcloud.html</link>
+  <pubDate>Sun, 18 Oct 2020 11:16:00 +0200</pubDate>
+</item>
+<item>
+  <title><![CDATA[Terminal emulators]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org73325c4">1. Alacritty</a></li>
+<li><a href="#orgd27c58c">2. Kitty</a>
+<ul>
+<li><a href="#org043b9ab">2.1. ~/.config/kitty/kitty.conf</a></li>
+</ul>
+</li>
+<li><a href="#org8c998e1">3. Throughput/Latency</a>
+<ul>
+<li><a href="#org25c0ad1">3.1. Lazy test conditions and comments</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+<p>
+I&rsquo;ve been using the same terminal emulator (<b><b>rxvt</b></b> and latter <b><b>urxvt</b></b>) since around 2008.
+I was pretty happy with the setup, running it with <b>urxvtd/urxvtc</b> until I tried to play around
+with family fonts including powerline symbols, and certain unicode characters which I never
+managed to get to display correctly.
+</p>
+
+<p>
+Additionally, at some point I added a second monitor to my home setup, with a higher resolution
+(2560x1440) than the older one (1920x1080) and finding a font family/size combination that rendered
+properly in both resolutions was rather problematic, so I was open to try alternatives.
+</p>
+
+<div id="outline-container-org73325c4" class="outline-2">
+<h2 id="org73325c4"><span class="section-number-2">1</span> Alacritty</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I had been looking into Rust CLI tools after a colleague recommended <a href="https://github.com/sharkdp/bat">bat</a>, the cat alternative.
+I&rsquo;m always a bit wary of the trend to re-implement <i>standard</i> tools in the latest trendy programming
+language, but as I was also interested in looking into Rust itself, I did some looking into other
+CLI tools developed in Rust, finding things like <b>dust</b>, <b>fd</b>, <b>exa</b> and also <a href="https://github.com/alacritty/alacritty">alacritty</a>:
+</p>
+
+<blockquote>
+<p>
+Alacritty is a terminal emulator with a strong focus on simplicity and
+performance. With such a strong focus on performance, included features are
+carefully considered and you can always expect Alacritty to be blazingly fast.
+By making sane choices for defaults, Alacritty requires no additional setup.
+However, it does allow configuration of many aspects of the terminal.
+</p>
+
+<p>
+The software is considered to be at a beta level of readiness &#x2013; there are a few
+missing features and bugs to be fixed, but it is already used by many as a daily
+driver.
+</p>
+</blockquote>
+
+<p>
+I was curious regarding the GPU gimmick, so I cloned the repository and built it locally and was quickly
+very satisfied with a few things:
+</p>
+<ol class="org-ol">
+<li><b>Very</b> fast feeling (in terms of latency), specially when used with TMUX, in comparison with <b>urxvt</b>.</li>
+<li>Out of the box working seamlessly with the font families I wanted to use.</li>
+<li>Somehow less noticeable difference in font size when using the same font size in both monitors side
+to side. I don&rsquo;t really understand how and why, but felt better to the eye.</li>
+</ol>
+
+<p>
+I instantly started using it as my main terminal and have used it exclusively with no major issue
+for the last ~5 months, until I tried <a href="https://sw.kovidgoyal.net/kitty/">kitty</a> last week.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd27c58c" class="outline-2">
+<h2 id="orgd27c58c"><span class="section-number-2">2</span> Kitty</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+I had heard about <b>kitty</b> before, but for some reason assumed it was more OS X oriented as
+most of the people recommending it in forums where using it on that system.
+</p>
+
+<p>
+After hearing about it again in a HackerNews thread I did a bit of reading and found out that:
+</p>
+<ol class="org-ol">
+<li>It&rsquo;s also GPU based like <b>alacritty</b></li>
+<li>Not looking to be minimal, more rich feature setup: tab and multiplexing support</li>
+<li>Available in <b>Debian</b> testing repositories, which I use</li>
+</ol>
+
+<p>
+I missed tab support with <b>alacritty</b>, as I used the functionality with <b>urxvt</b> and like it for
+some of my workflows.
+</p>
+
+<p>
+I needed to add some minimal modifications to the default configuration, mostly to switch
+the main modifier from Ctrl+Shift to just Ctrl, and then to disable some duplicated key mappings
+after changing the main modifier which conflicted with some of my shell keybindings.
+</p>
+
+<p>
+The latency feeling is equally fast as <b>alacritty</b>, but the fact that <b>kitty</b> is already
+a Debian package, plus the tab support are winner qualities for me.
+</p>
+</div>
+
+
+<div id="outline-container-org043b9ab" class="outline-3">
+<h3 id="org043b9ab"><span class="section-number-3">2.1</span> ~/.config/kitty/kitty.conf</h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #91889B;"># </span><span style="color: #91889B;">General behaviour</span>
+allow_remote_control true
+strip_trailing_spaces true
+copy_on_select true
+
+<span style="color: #91889B;"># </span><span style="color: #91889B;">Font</span>
+font_family Source Code Pro
+font_size <span style="color: #FFB85B; font-weight: bold;">11.5</span>
+
+<span style="color: #91889B;"># </span><span style="color: #91889B;">Theme</span>
+include ~/workspace/kitty-themes/themes/Monokai.conf
+
+<span style="color: #91889B;"># </span><span style="color: #91889B;">Tab Bar</span>
+tab_bar_style powerline
+
+<span style="color: #91889B;"># </span><span style="color: #91889B;">mappings</span>
+kitty_mod ctrl
+
+<span style="color: #91889B;"># </span><span style="color: #91889B;">Disable conflicting mappings</span>
+<span style="color: #EB64B9;">map</span> kitty_mod+a no_op
+<span style="color: #EB64B9;">map</span> kitty_mod+c no_op
+<span style="color: #EB64B9;">map</span> kitty_mod+e no_op
+<span style="color: #EB64B9;">map</span> kitty_mod+r no_op
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8c998e1" class="outline-2">
+<h2 id="org8c998e1"><span class="section-number-2">3</span> Throughput/Latency</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+I was curious about the actual differences, but measuring the latency is not trivial.
+After reading Dan Luu&rsquo;s articles on terminal<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> and keyboard<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> latency, I wanted
+to try to replicate some of the results myself (for the 3 terminal I used), and also
+was curious about the editor latency results from Pavel Fatin<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> and the use of
+his tool <a href="https://github.com/pavelfatin/typometer">typometer</a> but didn&rsquo;t manage to make it work in the first try (need to
+follow certain recommendations to ensure that no program is catching keypresses other
+than typometer), so I leave that out for now.
+</p>
+
+<p>
+I lazily (a few manual repetitions only) replicated the bandwidth tests from <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-zsh">timeout 64 sh -c 'cat /dev/urandom | base32 &gt; junk.txt'
+timeout 8 sh -c 'cat junk.txt | tee junk.term_name'
+</pre>
+</div>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><b>Throughput (MB/s)</b></td>
+<td class="org-left"><b>alacritty</b></td>
+<td class="org-left"><b>kitty</b></td>
+<td class="org-left"><b>urxvt</b></td>
+</tr>
+
+<tr>
+<td class="org-left"><b>standalone</b></td>
+<td class="org-left">66.8</td>
+<td class="org-left">34.25</td>
+<td class="org-left">52.88</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>+tmux</b>  (%standalone)</td>
+<td class="org-left">37.75 (56%)</td>
+<td class="org-left">38.25 (111.6%)</td>
+<td class="org-left">39 (76%)</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>latency eye test</b></td>
+<td class="org-left">very fast</td>
+<td class="org-left">very fast</td>
+<td class="org-left">very fast</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>latency eye test</b> + tmux</td>
+<td class="org-left">smooth</td>
+<td class="org-left">smoothest</td>
+<td class="org-left">clunky, text rendered in chunks</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div id="outline-container-org25c0ad1" class="outline-3">
+<h3 id="org25c0ad1"><span class="section-number-3">3.1</span> Lazy test conditions and comments</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>All tests in the same computer and conditions</li>
+<li>Results are a single &ldquo;representative&rdquo; value. I ran a set of executions on each setup case
+to rule out outliers, but didn&rsquo;t record properly the times to calculate means/stdev</li>
+<li>The eye tests corresponded to my personal feeling experienced when running the tests and observing
+the text scrolling down.</li>
+<li>I&rsquo;d say that the differences <b>alacritty</b> and <b>kitty</b> are very minimal. The clunkyness in the scrolling
+when using <b>urxvt</b> + tmux I had already noticed, but doesn&rsquo;t impact the actual throughput.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://danluu.com/term-latency/">https://danluu.com/term-latency/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://danluu.com/keyboard-latency/">https://danluu.com/keyboard-latency/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://pavelfatin.com/typing-with-pleasure/">https://pavelfatin.com/typing-with-pleasure/</a>
+</p></div></div>
+
+
+</div>
+</div><div class="taglist"><a href="https://icot.github.io/tags.html">Tags</a>: <a href="https://icot.github.io/tag-terminal.html">terminal</a> <a href="https://icot.github.io/tag-emulator.html">emulator</a> <a href="https://icot.github.io/tag-latency.html">latency</a> <a href="https://icot.github.io/tag-kitty.html">kitty</a> <a href="https://icot.github.io/tag-alacritty.html">alacritty</a> </div>]]></description>
+  <category><![CDATA[terminal]]></category>
+  <category><![CDATA[emulator]]></category>
+  <category><![CDATA[latency]]></category>
+  <category><![CDATA[kitty]]></category>
+  <category><![CDATA[alacritty]]></category>
+  <link>https://icot.github.io/2020-09-26-terminal.html</link>
+  <pubDate>Sat, 26 Sep 2020 19:55:00 +0200</pubDate>
+</item>
+</channel>
+</rss>
