@@ -50,6 +50,21 @@
     margin-top: 2em;
     font-size: 16px;
 }
+
+
+#content h1 {
+    font-size:25px;
+    text-decoration: underline;
+}
+
+#content h2 {
+    font-size:16px;
+}
+
+#content h3 {
+    font-size:16px;
+}
+
 .taglist, .taglist a {
     margin-top: 10px;
     font-size: 16px;
@@ -61,9 +76,8 @@
     font-style: italic
 }
 .post-date {
-    margin-top: 2em;
-    color: var(--date-color);
-    font-weight: bold;
+    color: var(--color-header);
+    font-weight: italic;
 }
 .article-meta {
     margin-left: 2.2em;
@@ -283,7 +297,7 @@ pre {
     color: #555500;
 }
 .underline {
-    /* text-decoration: underline; */
+    text-decoration: underline;
 }
 
 /* Style The Dropdown Button */
@@ -379,11 +393,11 @@ tr:nth-child(even) {background-color: var(--color-background-darker);}
 }
 
 #table-of-contents h2 {
-      /* font-weight: bold; */
-      padding-left: 0.5em;
-      padding-left: 0.5em;
-      padding-top: 0.4em;
-      padding-bottom: 0.4em;
+    font-size:16px;
+    padding-left: 0.5em;
+    padding-left: 0.5em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
 }
 
 #table-of-contents #text-table-of-contents {
