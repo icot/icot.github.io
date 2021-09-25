@@ -5,7 +5,6 @@
     --deep-tuscan-red: #713F51;
     --japanese-violet: #583451;
     --very-pale-orange: #F9DDBF;
-    --very-pale-orange-pre: #F9ddbf;
     --tumbleweed: #EDA191;
     --white-paper: #f9fbff;
     --black-chocolate: #1b1811;
@@ -385,9 +384,16 @@ table, th, td {
 }
 
 /* TODO */
-tr:nth-child(even) {
-    background-color: var(--color-background-darker);
+
+tr:first-of-type {
+    background-color: var(--very-pale-orange);
 }
+
+td:first-of-type {
+    background-color: var(--very-pale-orange);
+}
+
+
 
 /* Table of Contents
 
