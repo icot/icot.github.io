@@ -179,7 +179,7 @@ a.identity {
 a.identity:hover {
     color: var(--a-identity-hover);
 }
-article,aside,details,figcaption,figure,footer,header,hgroup,nav,section{
+article,aside,details,figcaption,footer,header,hgroup,nav,section{
     display:block;
 }
 
@@ -207,10 +207,15 @@ sup{
 sub{
     bottom:-0.25em;
 }
+
+figure{
+    display:block;
+    max-width:50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 img{
-    max-width:100%;
-    height:auto;
-    border:0;
     -ms-interpolation-mode:bicubic;
 }
 button,input,select,textarea{

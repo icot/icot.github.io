@@ -1,0 +1,18 @@
+#+TITLE: Readings: x+y
+#+date: <2021-09-26 11:19>
+#+filetags: math gender
+
+* X+Y A Mathematician's Manifesto for Rethinking Gender
+
+#+CAPTION: Book cover
+[[./images/readings/xy.jpeg]]
+
+The book main thesis proposes a new way to think and approach gender related inequality issues.
+
+The author defines two terms: _ingressive_ and _congressive_ behavior as the two dimensions
+to explain social behavior, and how gender is taken frequently as proxy (in a biased  and limited way)
+for the character traits and properties of these classes.
+
+I liked this book. Very interesting and well written. I found the proposed ingressive/congressive
+model offers a better framework than pure gender based approaches to try to design and implement
+solutions of gender based inequality.

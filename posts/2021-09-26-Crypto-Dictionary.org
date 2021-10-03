@@ -1,0 +1,11 @@
+#+TITLE: Readings: Crypto Dictionary
+#+date: <2021-09-26 11:19>
+#+filetags: crypto
+
+* Crypto Dictionary. 500 Tasty tidbits for the Curious Cryptographer
+
+#+CAPTION: Book cover
+[[./images/readings/crypto-dictionary-main.jpeg]]
+
+Informative, with some jokes. Easy to read. A few interesting entries to investigate
+further but a bit too short as a book to justify the price in my opinion.
