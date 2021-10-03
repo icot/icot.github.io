@@ -4,7 +4,85 @@
 <title><![CDATA[icot.github.io]]></title>
 <description><![CDATA[icot.github.io]]></description>
 <link>https://icot.github.io/</link>
-<lastBuildDate>Sun, 18 Apr 2021 14:18:23 +0200</lastBuildDate>
+<lastBuildDate>Sun, 03 Oct 2021 14:51:07 +0200</lastBuildDate>
+<item>
+  <title><![CDATA[Readings: x+y]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org23bb5c8">1. X+Y A Mathematician&rsquo;s Manifesto for Rethinking Gender</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org23bb5c8" class="outline-2">
+<h2 id="org23bb5c8"><span class="section-number-2">1.</span> X+Y A Mathematician&rsquo;s Manifesto for Rethinking Gender</h2>
+<div class="outline-text-2" id="text-1">
+
+<figure id="org0e55965">
+<img src="./images/readings/xy.jpeg" alt="xy.jpeg">
+
+<figcaption><span class="figure-number">Figure 1: </span>Book cover</figcaption>
+</figure>
+
+<p>
+The book main thesis proposes a new way to think and approach gender related inequality issues.
+</p>
+
+<p>
+The author defines two terms: <span class="underline">ingressive</span> and <span class="underline">congressive</span> behavior as the two dimensions
+to explain social behavior, and how gender is taken frequently as proxy (in a biased  and limited way)
+for the character traits and properties of these classes.
+</p>
+
+<p>
+I liked this book. Very interesting and well written. I found the proposed ingressive/congressive
+model offers a better framework than pure gender based approaches to try to design and implement
+solutions of gender based inequality.
+</p>
+</div>
+</div>
+<div class="taglist"><a href="https://icot.github.io/tags.html">Tags</a>: <a href="https://icot.github.io/tag-math.html">math</a> <a href="https://icot.github.io/tag-gender.html">gender</a> </div>]]></description>
+  <category><![CDATA[math]]></category>
+  <category><![CDATA[gender]]></category>
+  <link>https://icot.github.io/2021-09-26-x+y.html</link>
+  <pubDate>Sun, 26 Sep 2021 11:19:00 +0200</pubDate>
+</item>
+<item>
+  <title><![CDATA[Readings: Crypto Dictionary]]></title>
+  <description><![CDATA[
+<nav id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3608992">1. Crypto Dictionary. 500 Tasty tidbits for the Curious Cryptographer</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org3608992" class="outline-2">
+<h2 id="org3608992"><span class="section-number-2">1.</span> Crypto Dictionary. 500 Tasty tidbits for the Curious Cryptographer</h2>
+<div class="outline-text-2" id="text-1">
+
+<figure id="orgc065db6">
+<img src="./images/readings/crypto-dictionary-main.jpeg" alt="crypto-dictionary-main.jpeg">
+
+<figcaption><span class="figure-number">Figure 1: </span>Book cover</figcaption>
+</figure>
+
+<p>
+Informative, with some jokes. Easy to read. A few interesting entries to investigate
+further but a bit too short as a book to justify the price in my opinion.
+</p>
+</div>
+</div>
+<div class="taglist"><a href="https://icot.github.io/tags.html">Tags</a>: <a href="https://icot.github.io/tag-crypto.html">crypto</a> </div>]]></description>
+  <category><![CDATA[crypto]]></category>
+  <link>https://icot.github.io/2021-09-26-Crypto-Dictionary.html</link>
+  <pubDate>Sun, 26 Sep 2021 11:19:00 +0200</pubDate>
+</item>
 <item>
   <title><![CDATA[about]]></title>
   <description><![CDATA[
@@ -29,39 +107,39 @@ Let&rsquo;s see how it looks like
 <item>
   <title><![CDATA[Nextcloud home deployment]]></title>
   <description><![CDATA[
-<nav id="table-of-contents">
+<nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org936bf3d">1. Intro</a>
+<li><a href="#org1cbc0c0">1. Intro</a>
 <ul>
-<li><a href="#orgc8b5363">1.1. Nextcloud vs Owncloud</a></li>
+<li><a href="#orgc7bd945">1.1. Nextcloud vs Owncloud</a></li>
 </ul>
 </li>
-<li><a href="#orga9a008f">2. First execution</a></li>
-<li><a href="#org733e930">3. Customizing configuration</a>
+<li><a href="#orgd88a738">2. First execution</a></li>
+<li><a href="#org09dc943">3. Customizing configuration</a>
 <ul>
-<li><a href="#org926169d">3.1. SSL Certificates</a></li>
-<li><a href="#org4a63bae">3.2. apache configuration</a>
+<li><a href="#org6e521e2">3.1. SSL Certificates</a></li>
+<li><a href="#orgc540e8a">3.2. apache configuration</a>
 <ul>
-<li><a href="#org5f14e03">3.2.1. Alternative method</a></li>
+<li><a href="#org2dba791">3.2.1. Alternative method</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orga10d8fa">4. Nextcloud configuration</a>
+<li><a href="#org254734f">4. Nextcloud configuration</a>
 <ul>
-<li><a href="#org519d192">4.1. External Database</a></li>
-<li><a href="#org16b1b8c">4.2. config/config.php trusted<sub>domains</sub></a></li>
+<li><a href="#org74df572">4.1. External Database</a></li>
+<li><a href="#orgf20c208">4.2. config/config.php trusted<sub>domains</sub></a></li>
 </ul>
 </li>
-<li><a href="#orgdbd51d8">5. Resulting Docker Compose file</a></li>
+<li><a href="#org1b7291a">5. Resulting Docker Compose file</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org936bf3d" class="outline-2">
-<h2 id="org936bf3d"><span class="section-number-2">1</span> Intro</h2>
+<div id="outline-container-org1cbc0c0" class="outline-2">
+<h2 id="org1cbc0c0"><span class="section-number-2">1.</span> Intro</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 I wanted to play with a home setup alternative to Cloud services like Dropbox or
@@ -88,8 +166,8 @@ The biggest restrictions for the setup came from the Android clients, in particu
 </ul>
 </div>
 
-<div id="outline-container-orgc8b5363" class="outline-3">
-<h3 id="orgc8b5363"><span class="section-number-3">1.1</span> Nextcloud vs Owncloud</h3>
+<div id="outline-container-orgc7bd945" class="outline-3">
+<h3 id="orgc7bd945"><span class="section-number-3">1.1.</span> Nextcloud vs Owncloud</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 The two biggest solutions on the home cloud space seem to be Nextcloud and Owncloud.
@@ -110,8 +188,8 @@ Just because of that I decided to try Nextcloud instead for this setup.
 </div>
 </div>
 
-<div id="outline-container-orga9a008f" class="outline-2">
-<h2 id="orga9a008f"><span class="section-number-2">2</span> First execution</h2>
+<div id="outline-container-orgd88a738" class="outline-2">
+<h2 id="orgd88a738"><span class="section-number-2">2.</span> First execution</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 I launched a quick instance using docker following the recommended instructions
@@ -127,7 +205,7 @@ set a volume for the actual data.
 <p>
 I extracted the default apache config from the running container with
 </p>
-<pre class="example" id="orgb82cfbb">
+<pre class="example" id="org6b3064a">
 mkdir apache2
 docker cp nextcloud_app_1:/etc/apache2 ./apache2
 </pre>
@@ -141,12 +219,12 @@ process will setup things there (You will want to do this to keep your data in s
 </div>
 </div>
 
-<div id="outline-container-org733e930" class="outline-2">
-<h2 id="org733e930"><span class="section-number-2">3</span> Customizing configuration</h2>
+<div id="outline-container-org09dc943" class="outline-2">
+<h2 id="org09dc943"><span class="section-number-2">3.</span> Customizing configuration</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org926169d" class="outline-3">
-<h3 id="org926169d"><span class="section-number-3">3.1</span> SSL Certificates</h3>
+<div id="outline-container-org6e521e2" class="outline-3">
+<h3 id="org6e521e2"><span class="section-number-3">3.1.</span> SSL Certificates</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Because of the Orgzly requirement for HTTPS I needed to reconfigure apache to serve using
@@ -159,7 +237,7 @@ via Wireguard.  With this setup, and Let&rsquo;s encrypt support for DNS based c
 I obtained a wildcard certificate (so I can reuse it for other internal services) using <a href="https://go-acme.github.io/lego/">Lego</a>:
 </p>
 
-<pre class="example" id="orgde8c239">
+<pre class="example" id="org6088c35">
 DUCKDNS_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXX \
  lego --dns duckdns --domains "*.yourdomain.duckdns.org" --email your.email@whatever.place run
 </pre>
@@ -171,8 +249,8 @@ which will be exposed to the container as a volume mounted on <b><b>/etc/ssl/pri
 </div>
 </div>
 
-<div id="outline-container-org4a63bae" class="outline-3">
-<h3 id="org4a63bae"><span class="section-number-3">3.2</span> apache configuration</h3>
+<div id="outline-container-orgc540e8a" class="outline-3">
+<h3 id="orgc540e8a"><span class="section-number-3">3.2.</span> apache configuration</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 With the certificates in place the following changes need to be applied to enable the apache
@@ -183,7 +261,7 @@ listener on 443 and use the new let&rsquo;s encrypt certificates:
 <li>Modify <b>apache2/sites-available/default-ssl.conf</b> so the <b>SSLCertificateFile</b> and <b>SSLCertificateKeyFile</b> match your certificate file names:</li>
 </ul>
 
-<pre class="example" id="org2898764">
+<pre class="example" id="orgb41fa36">
     SSLCertificateFile  /etc/ssl/private/_.yourdomain.duckdns.org.crt
     SSLCertificateKeyFile /etc/ssl/private/_.yourdomain.duckdns.org.key
 </pre>
@@ -191,20 +269,20 @@ listener on 443 and use the new let&rsquo;s encrypt certificates:
 <ul class="org-ul">
 <li>Enable default-ssl site.</li>
 </ul>
-<pre class="example" id="orgf7447ec">
+<pre class="example" id="orga506335">
 apache2/ $ ln -s sites-available/default-ssl.conf sites-enabled/default-ssl.conf
 </pre>
 <ul class="org-ul">
 <li>Enable ssl module.</li>
 </ul>
-<pre class="example" id="orgdfa7a46">
+<pre class="example" id="orgabbe50f">
 apache2/ $ ln -s mods-available/default-ssl.conf mods-enabled/ssl.conf
 apache2/ $ ln -s mods-available/default-ssl.load mods-enabled/ssl.load
 </pre>
 </div>
 
-<div id="outline-container-org5f14e03" class="outline-4">
-<h4 id="org5f14e03"><span class="section-number-4">3.2.1</span> Alternative method</h4>
+<div id="outline-container-org2dba791" class="outline-4">
+<h4 id="org2dba791"><span class="section-number-4">3.2.1.</span> Alternative method</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 An alternative for the enabling/configuration is to run the container and enable
@@ -220,12 +298,12 @@ save the changes with <b><b>docker cp</b></b>.
 </div>
 </div>
 
-<div id="outline-container-orga10d8fa" class="outline-2">
-<h2 id="orga10d8fa"><span class="section-number-2">4</span> Nextcloud configuration</h2>
+<div id="outline-container-org254734f" class="outline-2">
+<h2 id="org254734f"><span class="section-number-2">4.</span> Nextcloud configuration</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org519d192" class="outline-3">
-<h3 id="org519d192"><span class="section-number-3">4.1</span> External Database</h3>
+<div id="outline-container-org74df572" class="outline-3">
+<h3 id="org74df572"><span class="section-number-3">4.1.</span> External Database</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 The Docker image already supports configuring an external database via the use of
@@ -234,7 +312,7 @@ network, so I just created an account and database there and configured the valu
 using environment variables in the <i>docker-compose.yaml</i> definition:
 </p>
 
-<pre class="example" id="orgcba494c">
+<pre class="example" id="org790c6f3">
     environment:
       POSTGRES_DB: nextcloud
       POSTGRES_USER: nextcloud
@@ -244,8 +322,8 @@ using environment variables in the <i>docker-compose.yaml</i> definition:
 </div>
 </div>
 
-<div id="outline-container-org16b1b8c" class="outline-3">
-<h3 id="org16b1b8c"><span class="section-number-3">4.2</span> config/config.php trusted<sub>domains</sub></h3>
+<div id="outline-container-orgf20c208" class="outline-3">
+<h3 id="orgf20c208"><span class="section-number-3">4.2.</span> config/config.php trusted<sub>domains</sub></h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 If you start now the container, the application will execute correctly but accesing it through the secure
@@ -253,7 +331,7 @@ endpoint will fail because your particular domain is not in the list of <b>trust
 file needs to be modified to add your desired domain list to the list:
 </p>
 
-<pre class="example" id="orga27f56d">
+<pre class="example" id="orgfb5a854">
 'trusted_domains' =&gt;
   array (
     0 =&gt; 'localhost:9080',
@@ -267,15 +345,15 @@ file needs to be modified to add your desired domain list to the list:
 </div>
 
 
-<div id="outline-container-orgdbd51d8" class="outline-2">
-<h2 id="orgdbd51d8"><span class="section-number-2">5</span> Resulting Docker Compose file</h2>
+<div id="outline-container-org1b7291a" class="outline-2">
+<h2 id="org1b7291a"><span class="section-number-2">5.</span> Resulting Docker Compose file</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 After applying the configuration changes, the following <b>docker-compose.yaml</b> can be used
 to run the service with the customized configuration:
 </p>
 
-<pre class="example" id="orgd28c63f">
+<pre class="example" id="org33c7b2f">
 version: '3.7'
 
 volumes:
@@ -326,19 +404,19 @@ services:
 <item>
   <title><![CDATA[Terminal emulators]]></title>
   <description><![CDATA[
-<nav id="table-of-contents">
+<nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org73325c4">1. Alacritty</a></li>
-<li><a href="#orgd27c58c">2. Kitty</a>
+<li><a href="#orge506df3">1. Alacritty</a></li>
+<li><a href="#orgf584634">2. Kitty</a>
 <ul>
-<li><a href="#org043b9ab">2.1. ~/.config/kitty/kitty.conf</a></li>
+<li><a href="#org5414dfb">2.1. ~/.config/kitty/kitty.conf</a></li>
 </ul>
 </li>
-<li><a href="#org8c998e1">3. Throughput/Latency</a>
+<li><a href="#orgf0cdb92">3. Throughput/Latency</a>
 <ul>
-<li><a href="#org25c0ad1">3.1. Lazy test conditions and comments</a></li>
+<li><a href="#org878911f">3.1. Lazy test conditions and comments</a></li>
 </ul>
 </li>
 </ul>
@@ -357,8 +435,8 @@ Additionally, at some point I added a second monitor to my home setup, with a hi
 properly in both resolutions was rather problematic, so I was open to try alternatives.
 </p>
 
-<div id="outline-container-org73325c4" class="outline-2">
-<h2 id="org73325c4"><span class="section-number-2">1</span> Alacritty</h2>
+<div id="outline-container-orge506df3" class="outline-2">
+<h2 id="orge506df3"><span class="section-number-2">1.</span> Alacritty</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 I had been looking into Rust CLI tools after a colleague recommended <a href="https://github.com/sharkdp/bat">bat</a>, the cat alternative.
@@ -401,8 +479,8 @@ for the last ~5 months, until I tried <a href="https://sw.kovidgoyal.net/kitty/"
 </div>
 </div>
 
-<div id="outline-container-orgd27c58c" class="outline-2">
-<h2 id="orgd27c58c"><span class="section-number-2">2</span> Kitty</h2>
+<div id="outline-container-orgf584634" class="outline-2">
+<h2 id="orgf584634"><span class="section-number-2">2.</span> Kitty</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 I had heard about <b>kitty</b> before, but for some reason assumed it was more OS X oriented as
@@ -436,54 +514,54 @@ a Debian package, plus the tab support are winner qualities for me.
 </div>
 
 
-<div id="outline-container-org043b9ab" class="outline-3">
-<h3 id="org043b9ab"><span class="section-number-3">2.1</span> ~/.config/kitty/kitty.conf</h3>
+<div id="outline-container-org5414dfb" class="outline-3">
+<h3 id="org5414dfb"><span class="section-number-3">2.1.</span> ~/.config/kitty/kitty.conf</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #91889B;"># </span><span style="color: #91889B;">General behaviour</span>
+<pre class="src src-python"><span style="color: #505050;"># </span><span style="color: #505050;">General behaviour</span>
 allow_remote_control true
 strip_trailing_spaces true
 copy_on_select true
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Font</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">Font</span>
 font_family Source Code Pro
-font_size <span style="color: #FFB85B; font-weight: bold;">11.5</span>
+font_size <span style="color: #0000c0;">11.5</span>
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Theme</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">Theme</span>
 include ~/workspace/kitty-themes/themes/Monokai.conf
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Tab Bar</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">Tab Bar</span>
 tab_bar_style powerline
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">mappings</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">mappings</span>
 kitty_mod ctrl
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Disable conflicting mappings</span>
-<span style="color: #EB64B9;">map</span> kitty_mod+a no_op
-<span style="color: #EB64B9;">map</span> kitty_mod+c no_op
-<span style="color: #EB64B9;">map</span> kitty_mod+e no_op
-<span style="color: #EB64B9;">map</span> kitty_mod+r no_op
+<span style="color: #505050;"># </span><span style="color: #505050;">Disable conflicting mappings</span>
+<span style="color: #8f0075;">map</span> kitty_mod+a no_op
+<span style="color: #8f0075;">map</span> kitty_mod+c no_op
+<span style="color: #8f0075;">map</span> kitty_mod+e no_op
+<span style="color: #8f0075;">map</span> kitty_mod+r no_op
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8c998e1" class="outline-2">
-<h2 id="org8c998e1"><span class="section-number-2">3</span> Throughput/Latency</h2>
+<div id="outline-container-orgf0cdb92" class="outline-2">
+<h2 id="orgf0cdb92"><span class="section-number-2">3.</span> Throughput/Latency</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I was curious about the actual differences, but measuring the latency is not trivial.
-After reading Dan Luu&rsquo;s articles on terminal<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> and keyboard<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> latency, I wanted
+After reading Dan Luu&rsquo;s articles on terminal<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> and keyboard<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> latency, I wanted
 to try to replicate some of the results myself (for the 3 terminal I used), and also
-was curious about the editor latency results from Pavel Fatin<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> and the use of
+was curious about the editor latency results from Pavel Fatin<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> and the use of
 his tool <a href="https://github.com/pavelfatin/typometer">typometer</a> but didn&rsquo;t manage to make it work in the first try (need to
 follow certain recommendations to ensure that no program is catching keypresses other
 than typometer), so I leave that out for now.
 </p>
 
 <p>
-I lazily (a few manual repetitions only) replicated the bandwidth tests from <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>:
+I lazily (a few manual repetitions only) replicated the bandwidth tests from <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 </p>
 
 <div class="org-src-container">
@@ -543,8 +621,8 @@ timeout 8 sh -c 'cat junk.txt | tee junk.term_name'
 </table>
 </div>
 
-<div id="outline-container-org25c0ad1" class="outline-3">
-<h3 id="org25c0ad1"><span class="section-number-3">3.1</span> Lazy test conditions and comments</h3>
+<div id="outline-container-org878911f" class="outline-3">
+<h3 id="org878911f"><span class="section-number-3">3.1.</span> Lazy test conditions and comments</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>All tests in the same computer and conditions</li>
@@ -562,15 +640,15 @@ when using <b>urxvt</b> + tmux I had already noticed, but doesn&rsquo;t impact t
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://danluu.com/term-latency/">https://danluu.com/term-latency/</a>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://danluu.com/keyboard-latency/">https://danluu.com/keyboard-latency/</a>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://pavelfatin.com/typing-with-pleasure/">https://pavelfatin.com/typing-with-pleasure/</a>
 </p></div></div>
 

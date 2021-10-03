@@ -13,22 +13,22 @@
 <link rel="icon" href="static/favicon.ico">
 </head>
 <body>
-<div id="preamble" class="status"><div class="header">  <a href="https://icot.github.io">icot.github.io</a>  <div class="sitelinks">    <a href="about.html">about</a>    | <a href="archive.html">archive</a>    | <div class="dropdown">       <a href="tags/html" class="dropbtn">tags</a>       <div class="dropdown-content"><a href="/blog/tag-alacritty.html">alacritty</a><a href="/blog/tag-docker.html">docker</a><a href="/blog/tag-emulator.html">emulator</a><a href="/blog/tag-kitty.html">kitty</a><a href="/blog/tag-latency.html">latency</a><a href="/blog/tag-nextcloud.html">nextcloud</a><a href="/blog/tag-terminal.html">terminal</a><a href="/blog/tag-test.html">test</a>       </div>      </div>    | <a href="rss.xml">rss</a>  </div></div></div>
+<div id="preamble" class="status"><div class="header">  <a href="https://icot.github.io">icot.github.io</a>  <div class="sitelinks">    <a href="about.html">about</a>    | <a href="archive.html">archive</a>    | <div class="dropdown">       <a href="tags/html" class="dropbtn">tags</a>       <div class="dropdown-content">       </div>      </div>    | <a href="rss.xml">rss</a>  </div></div></div>
 <div id="content">
 <div class="post-date">26 Sep 2020</div><h1 class="post-title"><a href="https://icot.github.io/2020-09-26-terminal.html">Terminal emulators</a></h1>
-<nav id="table-of-contents">
+<nav id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org73325c4">1. Alacritty</a></li>
-<li><a href="#orgd27c58c">2. Kitty</a>
+<li><a href="#orge506df3">1. Alacritty</a></li>
+<li><a href="#orgf584634">2. Kitty</a>
 <ul>
-<li><a href="#org043b9ab">2.1. ~/.config/kitty/kitty.conf</a></li>
+<li><a href="#org5414dfb">2.1. ~/.config/kitty/kitty.conf</a></li>
 </ul>
 </li>
-<li><a href="#org8c998e1">3. Throughput/Latency</a>
+<li><a href="#orgf0cdb92">3. Throughput/Latency</a>
 <ul>
-<li><a href="#org25c0ad1">3.1. Lazy test conditions and comments</a></li>
+<li><a href="#org878911f">3.1. Lazy test conditions and comments</a></li>
 </ul>
 </li>
 </ul>
@@ -47,8 +47,8 @@ Additionally, at some point I added a second monitor to my home setup, with a hi
 properly in both resolutions was rather problematic, so I was open to try alternatives.
 </p>
 
-<div id="outline-container-org73325c4" class="outline-2">
-<h2 id="org73325c4"><span class="section-number-2">1</span> Alacritty</h2>
+<div id="outline-container-orge506df3" class="outline-2">
+<h2 id="orge506df3"><span class="section-number-2">1.</span> Alacritty</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 I had been looking into Rust CLI tools after a colleague recommended <a href="https://github.com/sharkdp/bat">bat</a>, the cat alternative.
@@ -91,8 +91,8 @@ for the last ~5 months, until I tried <a href="https://sw.kovidgoyal.net/kitty/"
 </div>
 </div>
 
-<div id="outline-container-orgd27c58c" class="outline-2">
-<h2 id="orgd27c58c"><span class="section-number-2">2</span> Kitty</h2>
+<div id="outline-container-orgf584634" class="outline-2">
+<h2 id="orgf584634"><span class="section-number-2">2.</span> Kitty</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 I had heard about <b>kitty</b> before, but for some reason assumed it was more OS X oriented as
@@ -126,54 +126,54 @@ a Debian package, plus the tab support are winner qualities for me.
 </div>
 
 
-<div id="outline-container-org043b9ab" class="outline-3">
-<h3 id="org043b9ab"><span class="section-number-3">2.1</span> ~/.config/kitty/kitty.conf</h3>
+<div id="outline-container-org5414dfb" class="outline-3">
+<h3 id="org5414dfb"><span class="section-number-3">2.1.</span> ~/.config/kitty/kitty.conf</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
-<pre class="src src-python"><span style="color: #91889B;"># </span><span style="color: #91889B;">General behaviour</span>
+<pre class="src src-python"><span style="color: #505050;"># </span><span style="color: #505050;">General behaviour</span>
 allow_remote_control true
 strip_trailing_spaces true
 copy_on_select true
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Font</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">Font</span>
 font_family Source Code Pro
-font_size <span style="color: #FFB85B; font-weight: bold;">11.5</span>
+font_size <span style="color: #0000c0;">11.5</span>
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Theme</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">Theme</span>
 include ~/workspace/kitty-themes/themes/Monokai.conf
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Tab Bar</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">Tab Bar</span>
 tab_bar_style powerline
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">mappings</span>
+<span style="color: #505050;"># </span><span style="color: #505050;">mappings</span>
 kitty_mod ctrl
 
-<span style="color: #91889B;"># </span><span style="color: #91889B;">Disable conflicting mappings</span>
-<span style="color: #EB64B9;">map</span> kitty_mod+a no_op
-<span style="color: #EB64B9;">map</span> kitty_mod+c no_op
-<span style="color: #EB64B9;">map</span> kitty_mod+e no_op
-<span style="color: #EB64B9;">map</span> kitty_mod+r no_op
+<span style="color: #505050;"># </span><span style="color: #505050;">Disable conflicting mappings</span>
+<span style="color: #8f0075;">map</span> kitty_mod+a no_op
+<span style="color: #8f0075;">map</span> kitty_mod+c no_op
+<span style="color: #8f0075;">map</span> kitty_mod+e no_op
+<span style="color: #8f0075;">map</span> kitty_mod+r no_op
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8c998e1" class="outline-2">
-<h2 id="org8c998e1"><span class="section-number-2">3</span> Throughput/Latency</h2>
+<div id="outline-container-orgf0cdb92" class="outline-2">
+<h2 id="orgf0cdb92"><span class="section-number-2">3.</span> Throughput/Latency</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 I was curious about the actual differences, but measuring the latency is not trivial.
-After reading Dan Luu&rsquo;s articles on terminal<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> and keyboard<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> latency, I wanted
+After reading Dan Luu&rsquo;s articles on terminal<sup><a id="fnr.1" class="footref" href="#fn.1" role="doc-backlink">1</a></sup> and keyboard<sup><a id="fnr.2" class="footref" href="#fn.2" role="doc-backlink">2</a></sup> latency, I wanted
 to try to replicate some of the results myself (for the 3 terminal I used), and also
-was curious about the editor latency results from Pavel Fatin<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> and the use of
+was curious about the editor latency results from Pavel Fatin<sup><a id="fnr.3" class="footref" href="#fn.3" role="doc-backlink">3</a></sup> and the use of
 his tool <a href="https://github.com/pavelfatin/typometer">typometer</a> but didn&rsquo;t manage to make it work in the first try (need to
 follow certain recommendations to ensure that no program is catching keypresses other
 than typometer), so I leave that out for now.
 </p>
 
 <p>
-I lazily (a few manual repetitions only) replicated the bandwidth tests from <sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>:
+I lazily (a few manual repetitions only) replicated the bandwidth tests from <sup><a id="fnr.1.100" class="footref" href="#fn.1" role="doc-backlink">1</a></sup>:
 </p>
 
 <div class="org-src-container">
@@ -233,8 +233,8 @@ timeout 8 sh -c 'cat junk.txt | tee junk.term_name'
 </table>
 </div>
 
-<div id="outline-container-org25c0ad1" class="outline-3">
-<h3 id="org25c0ad1"><span class="section-number-3">3.1</span> Lazy test conditions and comments</h3>
+<div id="outline-container-org878911f" class="outline-3">
+<h3 id="org878911f"><span class="section-number-3">3.1.</span> Lazy test conditions and comments</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>All tests in the same computer and conditions</li>
@@ -252,43 +252,42 @@ when using <b>urxvt</b> + tmux I had already noticed, but doesn&rsquo;t impact t
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
-<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1" role="doc-backlink">1</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://danluu.com/term-latency/">https://danluu.com/term-latency/</a>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2" role="doc-backlink">2</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://danluu.com/keyboard-latency/">https://danluu.com/keyboard-latency/</a>
 </p></div></div>
 
-<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3" role="doc-backlink">3</a></sup> <div class="footpara" role="doc-footnote"><p class="footpara">
 <a href="https://pavelfatin.com/typing-with-pleasure/">https://pavelfatin.com/typing-with-pleasure/</a>
 </p></div></div>
 
 
 </div>
 </div><div class="taglist"><a href="https://icot.github.io/tags.html">Tags</a>: <a href="https://icot.github.io/tag-terminal.html">terminal</a> <a href="https://icot.github.io/tag-emulator.html">emulator</a> <a href="https://icot.github.io/tag-latency.html">latency</a> <a href="https://icot.github.io/tag-kitty.html">kitty</a> <a href="https://icot.github.io/tag-alacritty.html">alacritty</a> </div></div>
-<div id="postamble" class="status"><div id="archive"><a href="archive.html">Other posts</a></div>
-<center>
-  <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">
-  <img alt="Creative Commons License" style="border-width:0; height:1.5em"
-       src="https://mirrors.creativecommons.org/presskit/buttons/80x15/png/by-sa.png"/>
-  </a>
+<div id="postamble" class="status"><center>
+
+  <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+    <img alt="Creative Commons License" style="border-width:0; height:1.5em"
+         src="https://mirrors.creativecommons.org/presskit/buttons/80x15/png/by-sa.png"/></a>
   <br />
-  <a xmlns:cc="https://creativecommons.org/ns#" href="https://icot.github.io"
-     property="cc:attributionName" rel="cc:attributionURL">icot.github.io</a>
-  is licensed under a
-  <a rel="license" href="https://creativecommons.org/licenses/by-sa/3.0/">
-      Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+  <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+        property="dct:title" rel="dct:type">
+  This personal blog </span> by <a xmlns:cc="http://creativecommons.org/ns#"
+                                     href="https://icot.github.io"
+                                     property="cc:attributionName" rel="cc:attributionURL">icot</a>
+  is licensed under a <a rel="license"
+                         href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
   <br />
-  Done with <a href="https://emacs.org">
+  Made with <a href="https://emacs.org">
       <img class="inline" src="https://upload.wikimedia.org/wikipedia/commons/0/08/EmacsIcon.svg" style="height:1.5em; margin-bottom:-0.3em; opacity: 0.9;" alt="Emacs" title="Emacs"/></a>
    , <a href="https://orgmode.org">
           <img class="inline" src="static/org-mode-unicorn-borderless-icon.svg" alt="Org mode unicorn logo" style="height:1.5em; margin-bottom:-0.3em; opacity:0.9;" title="Org Mode"></a>
       and <a href="https://github.com/bastibe/org-static-blog">bastibe/org-static-blog</a>
-  with the CSS theme based on <a rel="jao.io" href="https://jao.io">jao.io</>
- <div w3-include-html="license.html"></div>
+  with the CSS theme based on <a rel="jao.io" href="https://jao.io">jao.io</>'s one.
 </center>
-
 </div>
 </body>
 </html>
