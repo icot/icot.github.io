@@ -9,7 +9,7 @@
   (let [header (slurp "static/header.html")
         preamble (slurp "static/preamble.html")
         postamble (slurp "static/postamble.html")
-        contents (:out (process/shell {:out :string} (str "pandoc --from org --to html " filename)))]
+        contents (:out (process/shell {:out :string} (str "pandoc -s --from org --to html --toc=true --toc-depth=3 " filename)))]
     (str header preamble contents postamble)))
 
 ;; process folder
