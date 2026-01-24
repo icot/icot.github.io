@@ -12,17 +12,25 @@
     --ghost-white-darker: #f0f0ff;
     --darker: #e1e3ed;
     --much-darker: #7e8581;
+    --mondrian-blue: #225095;
+    --mondrian-yellow: #fff001;
+    --mondrian-white: #f9f9f9;
+    --mondrian-black: #30303a;
+    --mondrian-red: #dd0100;
+    --mb-white: #fefefe;
+    --mb-red: #a33000;
+
     /* elements */
-    --color: var(--black-chocolate);
-    --background-color: var(--white-paper);
+    --color: var(--mondrian-black);
+    --background-color: var(--mondrian-white);
     --toc-color: var(--deep-tuscan-red);
     --toc-background: var(--very-pale-orange);
     --dropbtn-background: var(--very-pale-orange);
     --pre-color: var(--tumbleweed);
     --pre-background: var(--darker);
-    --tags-color: var(--deep-tuscan-red);
-    --header-a-color: var(--japanese-violet);
-    --a-color: var(--deep-tuscan-red);
+    --tags-color: var(--mondrian-blue);
+    --header-a-color: var(--mondrian-blue);
+    --a-color: var(--mondrian-blue);
     --site-links-color: var(--a-color);
     --dropdown-content-a-background: var(--very-pale-orange);
     --dropdown-content-a-background-hover: var(--tumbleweed);
