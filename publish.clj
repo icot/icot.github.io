@@ -4,31 +4,53 @@
          '[babashka.fs :as fs]
          '[clojure.string :as str])
 
-;; Convert org file to html and surround with scaffolding elements
 (defn org-to-html [filename]
-  (let [header (slurp "static/header.html")
-        preamble (slurp "static/preamble.html")
-        postamble (slurp "static/postamble.html")
-        contents (:out (process/shell {:out :string} (str "pandoc -s --from org --to html --toc=true --toc-depth=3 " filename)))]
-    (str header preamble contents postamble)))
+  """Convert org file to html with provided template and style"""
+  (let [contents (:out
+                  (process/shell {:out :string}
+                                 (str "pandoc "
+                                      "--standalone "
+                                      "--template=static/template.html "
+                                      "--from org "
+                                      "--to html "
+                                      "--toc=true --toc-depth=3 "
+                                      "--include-before-body=static/preamble.html "
+                                      "--include-after-body=static/postamble.html "
+                                      "--number-sections "
+                                      "--css=static/style.css "
+                                      filename)))]
+    (str contents)))
 
-;; process folder
-;; for all org files
-;; - generate target filename
-;; - convert
-;; - write result to target
-;; Generate index
+(defn extract-org-metadata [file-path]
+  (let [content (slurp file-path)
+        lines (str/split-lines content)]
+    (->> lines
+         (take-while #(or (re-matches #"^\#\+.*" %)
+                          (str/blank? %)))
+         (remove str/blank?)
+         (keep (fn [line]
+                 (when-let [[_ k v] (re-matches #"^\#\+(\w+):\s*(.+)" line)]
+                   [(keyword (str/lower-case k)) v])))
+         (into {}))))
 
 (defn process [folder]
+  """Converts a folder of org files to html.
+     Returns list of metadata hashes for each processed file."""
   (let [file-paths (map str (fs/glob folder "**{.org}"))]
-    (doseq [file-path file-paths]
-      (println "Processing: " file-path)
-      (let* [file-name (fs/file-name file-path)
-             target-file (str/replace file-name #"org$" "test.html")
-             contents (org-to-html file-path)]
-        (spit target-file contents)))))
+    (doall
+     (for [file-path file-paths]
+       (do
+        (let* [file-name (fs/file-name file-path)
+               target-file (str/replace file-name #"org$" "html")
+               contents (org-to-html file-path)]
+          (spit target-file contents))
+        (extract-org-metadata file-path))))))
 
-(process "posts")
+;;; Main
+;; Convert posts
+(doall (map println (process "posts")))
+;; Generate Index
+;; Generate Tag files and Taglist
 
 (defn -main [args])
 ;; Execute
